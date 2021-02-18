@@ -15,6 +15,7 @@
     "camelcase-keys": "^6.2.2",
     "core-js": "^3.6.5",
     "deepmerge": "^4.2.2",
+    "reflect-metadata": "^0.1.13",
     "typedi": "^0.10.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",

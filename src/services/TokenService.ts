@@ -1,1 +1,3 @@
-export default class TokenService {}
+export default class TokenService {
+  getAccessToken() {}
+}

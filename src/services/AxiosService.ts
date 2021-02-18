@@ -16,22 +16,22 @@ export default class AxiosService implements misc.HttpClient {
     return this.axiosInstance.get(url, config);
   }
 
-  post(url: string, data = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
+  post(url: string, payload = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
     const defaultConfig: Partial<AxiosRequestConfig> = {};
     const config = deepmerge(defaultConfig, extraConfig);
-    return this.axiosInstance.post(url, data, config);
+    return this.axiosInstance.post(url, payload, config);
   }
 
-  put(url: string, data = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
+  put(url: string, payload = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
     const defaultConfig: Partial<AxiosRequestConfig> = {};
     const config = deepmerge(defaultConfig, extraConfig);
-    return this.axiosInstance.put(url, data, config);
+    return this.axiosInstance.put(url, payload, config);
   }
 
-  patch(url: string, data = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
+  patch(url: string, payload = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
     const defaultConfig: Partial<AxiosRequestConfig> = {};
     const config = deepmerge(defaultConfig, extraConfig);
-    return this.axiosInstance.patch(url, data, config);
+    return this.axiosInstance.patch(url, payload, config);
   }
 
   // eslint-disable-next-line max-len

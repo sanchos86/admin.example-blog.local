@@ -1,1 +1,3 @@
-export default class AuthService {}
+export default class AuthService {
+  logout() {}
+}
