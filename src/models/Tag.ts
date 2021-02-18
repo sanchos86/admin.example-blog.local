@@ -1,6 +1,8 @@
 export default class Tag {
   id: number;
+
   name: string;
+
   slug: string;
 
   constructor(data: any = {}) {

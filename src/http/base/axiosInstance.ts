@@ -2,7 +2,7 @@ import { Container } from 'typedi';
 import camelcaseKeys from 'camelcase-keys';
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { MimeTypes } from '@/typings/enum';
+import { MimeType } from '@/typings/enum';
 import tokens from '@/services/tokens';
 import AuthService from '@/services/AuthService';
 import TokenService from '@/services/TokenService';
@@ -13,7 +13,7 @@ const instance: AxiosInstance = axios.create({
   baseURL,
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': MimeTypes.APPLICATION_JSON
+    'Content-Type': MimeType.APPLICATION_JSON
   },
   secure: true
 });

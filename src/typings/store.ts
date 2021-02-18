@@ -1,31 +1,24 @@
 import Category from '@/models/Category';
-import Social from '@/models/Social';
 import Tag from '@/models/Tag';
-
-export interface Progress {
-  [key: string]: boolean
-}
-
-export interface ProgressPayload {
-  progressCode: string,
-  isActive: boolean
-}
-
-export interface RootState {}
+import Alert from '@/models/Alert';
+import User from '@/models/User';
 
 export interface CommonState {
-  progress: Progress,
-  language: string
+  language: string;
+}
+
+export interface AlertsState {
+  alerts: Alert[];
 }
 
 export interface CategoriesState {
-  categories: Category[]
+  categories: Category[];
 }
 
 export interface TagsState {
-  tags: Tag[]
+  tags: Tag[];
 }
 
-export interface SocialsState {
-  socials: Social[]
+export interface UserState {
+  user: User;
 }

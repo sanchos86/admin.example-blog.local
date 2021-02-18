@@ -1,4 +1,4 @@
-export enum MimeTypes {
+export enum MimeType {
   APPLICATION_JSON = 'application/json'
 }
 

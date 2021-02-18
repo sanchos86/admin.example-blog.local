@@ -3,13 +3,21 @@ import Category from '@/models/Category';
 
 export default class Post {
   id: number;
+
   src: string;
+
   slug: string;
+
   title: string;
+
   text: string;
+
   publishedAt: string | null;
+
   postViews: number;
+
   category: Category;
+
   tags: Tag[];
 
   constructor(data: any = {}) {
