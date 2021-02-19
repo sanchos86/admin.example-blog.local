@@ -20,5 +20,5 @@ export interface TagsState {
 }
 
 export interface UserState {
-  user: User;
+  user: User | null;
 }

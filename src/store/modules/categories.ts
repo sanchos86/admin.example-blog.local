@@ -1,18 +1,34 @@
 import { Module, MutationTree } from 'vuex';
 
+import Category from '@/models/Category';
 import { CategoriesState } from '@/typings/store';
 
 const namespaced = true;
 
-const state: CategoriesState = {
+const getDefaultState = (): CategoriesState => ({
   categories: [],
-};
+});
 
-const mutations: MutationTree<CategoriesState> = {};
+const mutations: MutationTree<CategoriesState> = {
+  resetState(state) {
+    Object.assign(state, getDefaultState());
+  },
+  setCategories(state, categories: Category[]) {
+    state.categories = categories;
+  },
+  updateCategory(state, category: Category) {
+    state.categories = state.categories.map((el) => {
+      if (el.id === category.id) {
+        return category;
+      }
+      return el;
+    });
+  },
+};
 
 const categories: Module<CategoriesState, {}> = {
   namespaced,
-  state,
+  state: getDefaultState(),
   mutations,
 };
 

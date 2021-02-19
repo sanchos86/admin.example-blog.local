@@ -4,13 +4,13 @@ import { CommonState } from '@/typings/store';
 
 const namespaced = true;
 
-const state: CommonState = {
+const getDefaultState = (): CommonState => ({
   language: 'ru',
-};
+});
 
 const common: Module<CommonState, {}> = {
   namespaced,
-  state,
+  state: getDefaultState(),
 };
 
 export default common;
