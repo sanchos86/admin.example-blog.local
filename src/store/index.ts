@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuex, { StoreOptions } from 'vuex';
+import Vuex, {Store, StoreOptions} from 'vuex';
 
 import tags from '@/store/modules/tags';
 import common from '@/store/modules/common';
@@ -8,7 +8,7 @@ import categories from '@/store/modules/categories';
 
 Vue.use(Vuex);
 
-const store: StoreOptions<{}> = {
+const storeOptions: StoreOptions<{}> = {
   state: {
   },
   mutations: {
@@ -23,4 +23,6 @@ const store: StoreOptions<{}> = {
   },
 };
 
-export default new Vuex.Store<{}>(store);
+const store: Store<{}> = new Vuex.Store<{}>(storeOptions);
+
+export default store;
