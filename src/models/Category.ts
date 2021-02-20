@@ -1,3 +1,5 @@
+import { Payload } from '@/typings/misc';
+
 export default class Category {
   id: number;
 
@@ -17,5 +19,19 @@ export default class Category {
 
   get text(): string {
     return this.name;
+  }
+
+  static getPayloadToAddCategory(data: any = {}): Payload {
+    return {
+      name: data.name,
+      slug: data.slug
+    };
+  }
+
+  static getPayloadToEditCategory(data: any = {}): Payload {
+    return {
+      name: data.name,
+      slug: data.slug
+    };
   }
 }

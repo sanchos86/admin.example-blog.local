@@ -1,3 +1,5 @@
+import { Payload } from '@/typings/misc';
+
 export default class Tag {
   id: number;
 
@@ -17,5 +19,19 @@ export default class Tag {
 
   get text(): string {
     return this.name;
+  }
+
+  static getPayloadToAddTag(data: any = {}): Payload {
+    return {
+      name: data.name,
+      slug: data.slug
+    };
+  }
+
+  static getPayloadToEditTag(data: any = {}): Payload {
+    return {
+      name: data.name,
+      slug: data.slug
+    };
   }
 }

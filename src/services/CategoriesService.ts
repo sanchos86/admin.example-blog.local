@@ -25,4 +25,17 @@ export default class CategoriesService {
     await this.store.dispatch('categories/setCategories', categories);
     return categories;
   }
+
+  async addCategory(data: any): Promise<Category> {
+    const payload = Category.getPayloadToAddCategory(data);
+    return this.baseApiService.categories.addCategory(payload);
+  }
+
+  async editCategory(categoryId: number, data: any): Promise<Category> {
+    const payload = Category.getPayloadToEditCategory(data);
+    let editedCategory = await this.baseApiService.categories.editCategory(categoryId, payload);
+    editedCategory = new Category(editedCategory);
+    this.store.commit('categories/updateCategory', editedCategory);
+    return editedCategory;
+  }
 }
