@@ -1,23 +1,22 @@
 import { Service, Inject } from 'typedi';
-import { Store } from 'vuex';
 
 import Tag from '@/models/Tag';
 import tokens from '@/services/tokens';
 import BaseApiService from '@/services/BaseApiService';
+import AlertService from '@/services/AlertService';
+
+import { AppStore } from '@/typings/store';
 
 @Service(tokens.TAGS_SERVICE)
 export default class TagsService {
-  private readonly baseApiService: BaseApiService;
+  @Inject(tokens.BASE_API_SERVICE)
+  private readonly baseApiService!: BaseApiService;
 
-  private readonly store: Store<{}>;
+  @Inject(tokens.STORE)
+  private readonly store!: AppStore;
 
-  constructor(
-    @Inject(tokens.BASE_API_SERVICE) baseApiService: BaseApiService,
-    @Inject(tokens.STORE) store: Store<{}>
-  ) {
-    this.baseApiService = baseApiService;
-    this.store = store;
-  }
+  @Inject(tokens.ALERTS_SERVICE)
+  private readonly alertsService!: AlertService;
 
   async getTags(): Promise<Tag[]> {
     let tags = await this.baseApiService.tags.getTags();

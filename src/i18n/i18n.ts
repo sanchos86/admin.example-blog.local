@@ -6,6 +6,8 @@ import store from '@/store';
 
 Vue.use(VueI18n);
 
+const { language } = store.state;
+
 const i18n = new VueI18n({
   pluralizationRules: {
     ru(choice, choicesLength) {
@@ -27,13 +29,12 @@ const i18n = new VueI18n({
       }
 
       return (choicesLength < 4) ? 2 : 3;
-    }
+    },
   },
-  // locale: store.state.common.language, TODO разобраться
-  locale: 'ru',
+  locale: language,
   messages: {
-    ru
-  }
+    ru,
+  },
 });
 
 export default i18n;

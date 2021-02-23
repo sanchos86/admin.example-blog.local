@@ -1,3 +1,4 @@
+import { Payload } from '@/typings/misc';
 import Tag from '@/models/Tag';
 import Category from '@/models/Category';
 
@@ -30,5 +31,13 @@ export default class Post {
     this.postViews = data.postViews;
     this.category = new Category(data.category);
     this.tags = (data.tags || []).map((tag: any) => new Tag(tag));
+  }
+
+  static getPayloadToAddPost(data: any = {}): Payload {
+    return {};
+  }
+
+  static getPayloadToEditPost(data: any = {}): Payload {
+    return {};
   }
 }

@@ -1,9 +1,13 @@
+import { Store } from 'vuex';
+
 import Category from '@/models/Category';
 import Tag from '@/models/Tag';
 import Alert from '@/models/Alert';
 import User from '@/models/User';
 
-export interface CommonState {
+export type AppStore = Store<RootState>
+
+export interface RootState {
   language: string;
 }
 

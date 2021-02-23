@@ -1,9 +1,16 @@
-import { ApiUnit, ApiUnitFactory, HttpClient, QueryParams, Payload } from '@/typings/misc';
+import {
+  ApiUnit,
+  ApiUnitFactory,
+  HttpClient,
+  QueryParams,
+  Payload,
+} from '@/typings/misc';
 
 export interface PostsApiUnit extends ApiUnit {
   getPosts(params: QueryParams): Promise<any>;
   getPost(slug: string): Promise<any>;
-  createPost(payload: Payload): Promise<any>;
+  addPost(payload: Payload): Promise<any>;
+  editPost(postId: number, payload: Payload): Promise<any>;
   publishPost(postId: number, payload: Payload): Promise<any>;
   deletePost(postId: number): Promise<any>;
 }
@@ -14,16 +21,20 @@ export interface PostsApiUnitFactory extends ApiUnitFactory {
 
 const posts: PostsApiUnitFactory = (httpService: HttpClient): PostsApiUnit => ({
   getPosts(params: QueryParams): Promise<any> {
-    const url = `posts`;
+    const url = 'posts';
     return httpService.get(url, params);
   },
   getPost(slug: string): Promise<any> {
     const url = `posts/${slug}`;
     return httpService.get(url);
   },
-  createPost(payload: Payload): Promise<any> {
-    const url = `posts`;
+  addPost(payload: Payload): Promise<any> {
+    const url = 'posts';
     return httpService.post(url, payload);
+  },
+  editPost(postId: number, payload: Payload): Promise<any> {
+    const url = `posts/${postId}`;
+    return httpService.put(url, payload);
   },
   publishPost(postId: number, payload: Payload): Promise<any> {
     const url = `posts/${postId}/publish`;
@@ -32,7 +43,7 @@ const posts: PostsApiUnitFactory = (httpService: HttpClient): PostsApiUnit => ({
   deletePost(postId: number): Promise<any> {
     const url = `posts/${postId}`;
     return httpService.delete(url);
-  }
+  },
 });
 
 export default posts;

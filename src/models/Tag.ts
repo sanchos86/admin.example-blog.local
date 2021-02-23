@@ -24,14 +24,14 @@ export default class Tag {
   static getPayloadToAddTag(data: any = {}): Payload {
     return {
       name: data.name,
-      slug: data.slug
+      slug: data.slug,
     };
   }
 
   static getPayloadToEditTag(data: any = {}): Payload {
     return {
       name: data.name,
-      slug: data.slug
+      slug: data.slug,
     };
   }
 }

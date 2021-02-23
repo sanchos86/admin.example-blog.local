@@ -1,4 +1,9 @@
-import { ApiUnit, ApiUnitFactory, HttpClient, Payload } from '@/typings/misc';
+import {
+  ApiUnit,
+  ApiUnitFactory,
+  HttpClient,
+  Payload,
+} from '@/typings/misc';
 
 export interface CategoriesApiUnit extends ApiUnit {
   getCategories(): Promise<any>;
@@ -22,7 +27,7 @@ const categories: CategoriesApiUnitFactory = (httpService: HttpClient): Categori
   editCategory(categoryId: number, payload: Payload): Promise<any> {
     const url = `categories/${categoryId}`;
     return httpService.put(url, payload);
-  }
+  },
 });
 
 export default categories;

@@ -1,15 +1,17 @@
 import Vue from 'vue';
-import Vuex, {Store, StoreOptions} from 'vuex';
+import Vuex, { StoreOptions } from 'vuex';
 
 import tags from '@/store/modules/tags';
-import common from '@/store/modules/common';
 import alerts from '@/store/modules/alerts';
 import categories from '@/store/modules/categories';
 
+import { RootState, AppStore } from '@/typings/store';
+
 Vue.use(Vuex);
 
-const storeOptions: StoreOptions<{}> = {
+const storeOptions: StoreOptions<RootState> = {
   state: {
+    language: 'ru',
   },
   mutations: {
   },
@@ -17,12 +19,11 @@ const storeOptions: StoreOptions<{}> = {
   },
   modules: {
     tags,
-    common,
     alerts,
     categories,
   },
 };
 
-const store: Store<{}> = new Vuex.Store<{}>(storeOptions);
+const store: AppStore = new Vuex.Store<RootState>(storeOptions);
 
 export default store;

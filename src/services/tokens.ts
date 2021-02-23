@@ -1,5 +1,4 @@
 import { Token } from 'typedi';
-import { Store } from 'vuex';
 
 import BaseApiService from '@/services/BaseApiService';
 import AlertService from '@/services/AlertService';
@@ -11,8 +10,10 @@ import UsersService from '@/services/UsersService';
 import TranslationService from '@/services/TranslationService';
 import PostsService from '@/services/PostsService';
 
+import { AppStore } from '@/typings/store';
+
 export default {
-  STORE: new Token<Store<{}>>(),
+  STORE: new Token<AppStore>(),
   BASE_API_SERVICE: new Token<BaseApiService>(),
   ALERTS_SERVICE: new Token<AlertService>(),
   AUTH_SERVICE: new Token<AuthService>(),
@@ -21,5 +22,5 @@ export default {
   CATEGORIES_SERVICE: new Token<CategoriesService>(),
   USERS_SERVICE: new Token<UsersService>(),
   TRANSLATION_SERVICE: new Token<TranslationService>(),
-  POSTS_SERVICE: new Token<PostsService>()
-}
+  POSTS_SERVICE: new Token<PostsService>(),
+};

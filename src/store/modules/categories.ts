@@ -1,7 +1,8 @@
 import { Module, MutationTree } from 'vuex';
 
 import Category from '@/models/Category';
-import { CategoriesState } from '@/typings/store';
+
+import { RootState, CategoriesState } from '@/typings/store';
 
 const namespaced = true;
 
@@ -26,7 +27,7 @@ const mutations: MutationTree<CategoriesState> = {
   },
 };
 
-const categories: Module<CategoriesState, {}> = {
+const categories: Module<CategoriesState, RootState> = {
   namespaced,
   state: getDefaultState(),
   mutations,

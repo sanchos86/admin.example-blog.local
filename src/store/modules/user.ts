@@ -1,7 +1,8 @@
 import { Module, GetterTree, MutationTree } from 'vuex';
 
 import User from '@/models/User';
-import { UserState } from '@/typings/store';
+
+import { RootState, UserState } from '@/typings/store';
 
 const namespaced = true;
 
@@ -9,7 +10,7 @@ const getDefaultState = (): UserState => ({
   user: null,
 });
 
-const getters: GetterTree<UserState, {}> = {
+const getters: GetterTree<UserState, RootState> = {
   isAuthorized(state): boolean {
     return Boolean(state.user && state.user.id);
   },
@@ -24,7 +25,7 @@ const mutations: MutationTree<UserState> = {
   },
 };
 
-const user: Module<UserState, {}> = {
+const user: Module<UserState, RootState> = {
   namespaced,
   state: getDefaultState(),
   getters,

@@ -1,7 +1,8 @@
 import { Module, MutationTree } from 'vuex';
 
 import Alert from '@/models/Alert';
-import { AlertsState } from '@/typings/store';
+
+import { RootState, AlertsState } from '@/typings/store';
 
 const namespaced = true;
 
@@ -24,7 +25,7 @@ const mutations: MutationTree<AlertsState> = {
   }
 };
 
-const alerts: Module<AlertsState, {}> = {
+const alerts: Module<AlertsState, RootState> = {
   namespaced,
   state: getDefaultState(),
   mutations,

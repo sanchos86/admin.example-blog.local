@@ -1,4 +1,9 @@
-import { ApiUnit, ApiUnitFactory, HttpClient, Payload } from '@/typings/misc';
+import {
+  ApiUnit,
+  ApiUnitFactory,
+  HttpClient,
+  Payload,
+} from '@/typings/misc';
 
 export interface AuthApiUnit extends ApiUnit {
   login(credentials: Payload): Promise<any>;
@@ -23,7 +28,7 @@ const auth: AuthApiUnitFactory = (httpService: HttpClient): AuthApiUnit => ({
   refresh(): Promise<any> {
     const url = 'refresh';
     return httpService.post(url);
-  }
+  },
 });
 
 export default auth;

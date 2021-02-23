@@ -24,14 +24,14 @@ export default class Category {
   static getPayloadToAddCategory(data: any = {}): Payload {
     return {
       name: data.name,
-      slug: data.slug
+      slug: data.slug,
     };
   }
 
   static getPayloadToEditCategory(data: any = {}): Payload {
     return {
       name: data.name,
-      slug: data.slug
+      slug: data.slug,
     };
   }
 }

@@ -1,10 +1,15 @@
-import { ApiUnit, ApiUnitFactory, HttpClient, Payload } from '@/typings/misc';
+import {
+  ApiUnit,
+  ApiUnitFactory,
+  HttpClient,
+  Payload,
+} from '@/typings/misc';
 
 export interface TagsApiUnit extends ApiUnit {
-  getTags(): Promise<any>,
-  addTag(payload: Payload): Promise<any>,
-  editTag(tagId: number, payload: Payload): Promise<any>,
-  deleteTag(tagId: number): Promise<any>
+  getTags(): Promise<any>;
+  addTag(payload: Payload): Promise<any>;
+  editTag(tagId: number, payload: Payload): Promise<any>;
+  deleteTag(tagId: number): Promise<any>;
 }
 
 export interface TagsApiUnitFactory extends ApiUnitFactory {
@@ -27,7 +32,7 @@ const tags: TagsApiUnitFactory = (httpService: HttpClient): TagsApiUnit => ({
   deleteTag(tagId: number): Promise<any> {
     const url = `tags/${tagId}`;
     return httpService.delete(url);
-  }
+  },
 });
 
 export default tags;

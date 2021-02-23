@@ -1,16 +1,10 @@
-import tags from '@/api/base/tags';
-import auth from '@/api/base/auth';
-import users from '@/api/base/users';
-import posts from '@/api/base/posts';
-import categories from '@/api/base/categories';
+import tags, { TagsApiUnitFactory } from '@/api/base/tags';
+import auth, { AuthApiUnitFactory } from '@/api/base/auth';
+import users, { UsersApiUnitFactory } from '@/api/base/users';
+import posts, { PostsApiUnitFactory } from '@/api/base/posts';
+import categories, { CategoriesApiUnitFactory } from '@/api/base/categories';
 
 import { ApiMap } from '@/typings/misc';
-
-import { TagsApiUnitFactory } from '@/api/base/tags';
-import { AuthApiUnitFactory } from '@/api/base/auth';
-import { UsersApiUnitFactory } from '@/api/base/users';
-import { PostsApiUnitFactory } from '@/api/base/posts';
-import { CategoriesApiUnitFactory } from '@/api/base/categories';
 
 export interface BaseApiMap extends ApiMap {
   tags: TagsApiUnitFactory;
@@ -25,7 +19,7 @@ const api: BaseApiMap = {
   auth,
   users,
   posts,
-  categories
+  categories,
 };
 
 export default api;

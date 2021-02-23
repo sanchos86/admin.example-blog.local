@@ -1,23 +1,18 @@
 import { Service, Inject } from 'typedi';
-import { Store } from 'vuex';
 
 import Category from '@/models/Category';
 import tokens from '@/services/tokens';
 import BaseApiService from '@/services/BaseApiService';
 
+import { AppStore } from '@/typings/store';
+
 @Service(tokens.CATEGORIES_SERVICE)
 export default class CategoriesService {
-  private readonly baseApiService: BaseApiService;
+  @Inject(tokens.BASE_API_SERVICE)
+  private readonly baseApiService!: BaseApiService;
 
-  private readonly store: Store<{}>;
-
-  constructor(
-    @Inject(tokens.BASE_API_SERVICE) baseApiService: BaseApiService,
-    @Inject(tokens.STORE) store: Store<{}>
-  ) {
-    this.baseApiService = baseApiService;
-    this.store = store;
-  }
+  @Inject(tokens.STORE)
+  private readonly store!: AppStore;
 
   async getCategories(): Promise<Category[]> {
     let categories = await this.baseApiService.categories.getCategories();

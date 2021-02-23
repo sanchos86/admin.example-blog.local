@@ -1,7 +1,8 @@
 import { Module, MutationTree } from 'vuex';
 
 import Tag from '@/models/Tag';
-import { TagsState } from '@/typings/store';
+
+import { RootState, TagsState } from '@/typings/store';
 
 const namespaced = true;
 
@@ -17,7 +18,7 @@ const mutations: MutationTree<TagsState> = {
     state.tags = tags;
   },
   updateTag(state, tag: Tag) {
-    state.tags = state.tags.map(el => {
+    state.tags = state.tags.map((el) => {
       if (el.id === tag.id) {
         return tag;
       }
@@ -25,11 +26,11 @@ const mutations: MutationTree<TagsState> = {
     });
   },
   deleteTag(state, tagId: number) {
-    state.tags = state.tags.filter(el => el.id !== tagId);
-  }
+    state.tags = state.tags.filter((el) => el.id !== tagId);
+  },
 };
 
-const tags: Module<TagsState, {}> = {
+const tags: Module<TagsState, RootState> = {
   namespaced,
   state: getDefaultState(),
   mutations,
