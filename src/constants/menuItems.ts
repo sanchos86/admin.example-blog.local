@@ -41,7 +41,7 @@ export default [
       {
         text: 'Профиль',
         icon: 'mdi-cog',
-        to: { name: 'profile-settings' },
+        to: { name: 'profile' },
       },
     ],
   },

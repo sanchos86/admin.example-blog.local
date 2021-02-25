@@ -4,9 +4,9 @@ import tokens from '@/services/tokens';
 
 @Service(tokens.TOKEN_SERVICE)
 export default class TokenService {
-  private readonly accessTokenKey = 'accessToken';
+  private readonly accessTokenKey = 'web-artisan.ru_accessToken';
 
-  private readonly expirationDateKey = 'expirationDate';
+  private readonly expirationDateKey = 'web-artisan.ru_expirationDate';
 
   setAccessToken(accessToken: string) {
     localStorage.setItem(this.accessTokenKey, accessToken);

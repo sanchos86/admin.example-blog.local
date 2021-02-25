@@ -1,12 +1,14 @@
 import 'reflect-metadata';
 import Vue from 'vue';
 import dayjs from 'dayjs';
+import { Container } from 'typedi';
 import i18n from '@/i18n/i18n';
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
 import vuetify from '@/plugins/vuetify';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import tokens from '@/services/tokens';
 import '@/DI';
 import '@/registerComponentHooks';
 import '@/filters/filters';
@@ -18,10 +20,38 @@ dayjs.extend(localizedFormat);
 Vue.prototype.dayjs = dayjs;
 Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  store,
-  vuetify,
-  i18n,
-  render: (h) => h(App),
-}).$mount('#app');
+const init = async () => {
+  const tokenService = Container.get(tokens.TOKEN_SERVICE);
+  const authService = Container.get(tokens.AUTH_SERVICE);
+  const userServices = Container.get(tokens.USERS_SERVICE);
+  const accessToken = tokenService.getAccessToken();
+  if (accessToken) {
+    const accessTokenValid = tokenService.checkAccessTokenValidity();
+    if (accessTokenValid) {
+      try {
+        await authService.refresh();
+        await userServices.getProfile();
+      } catch (e) {
+        tokenService.removeAccessToken();
+        tokenService.removeExpirationDate()
+      }
+    } else {
+      tokenService.removeAccessToken();
+      tokenService.removeExpirationDate()
+    }
+  }
+};
+
+(async () => {
+  try {
+    await init();
+  } finally {
+    new Vue({
+      router,
+      store,
+      vuetify,
+      i18n,
+      render: (h) => h(App),
+    }).$mount('#app');
+  }
+})();
