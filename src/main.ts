@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import Vue from 'vue';
 import dayjs from 'dayjs';
 import { Container } from 'typedi';
+import Vuelidate from 'vuelidate';
 import i18n from '@/i18n/i18n';
 import App from '@/App.vue';
 import router from '@/router';
@@ -16,6 +17,8 @@ import 'dayjs/locale/ru';
 
 dayjs.locale('ru');
 dayjs.extend(localizedFormat);
+
+Vue.use(Vuelidate);
 
 Vue.prototype.dayjs = dayjs;
 Vue.config.productionTip = false;
