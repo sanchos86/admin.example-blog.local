@@ -32,3 +32,7 @@ export interface HttpClient {
   patch(url: string, payload?: Payload, extraConfig?: Partial<AxiosRequestConfig>): Promise<any>;
   delete(url: string, params?: QueryParams, extraConfig?: Partial<AxiosRequestConfig>): Promise<any>;
 }
+
+export type Loading = {
+  [key: string]: boolean;
+};
