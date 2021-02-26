@@ -1,3 +1,4 @@
+import '@/registerComponentHooks';
 import 'reflect-metadata';
 import Vue from 'vue';
 import dayjs from 'dayjs';
@@ -11,7 +12,6 @@ import vuetify from '@/plugins/vuetify';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import tokens from '@/services/tokens';
 import '@/DI';
-import '@/registerComponentHooks';
 import '@/filters/filters';
 import 'dayjs/locale/ru';
 

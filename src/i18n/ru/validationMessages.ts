@@ -1,1 +1,6 @@
-export default {};
+export default {
+  UNKNOWN: 'Ошибка',
+  REQUIRED: 'Обязательное поле',
+  EMAIL: 'Укажите корректную электронную почту',
+  MIN_LENGTH: 'Количество символов должно быть больше {min}'
+};
