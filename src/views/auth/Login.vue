@@ -60,8 +60,8 @@
     };
 
     form: LoginForm = {
-      email: '',
-      password: '',
+      email: 'admin@admin.ru',
+      password: 'combat18',
     };
 
     validations() {

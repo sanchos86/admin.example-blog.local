@@ -17,16 +17,16 @@ export interface AuthApiUnitFactory extends ApiUnitFactory {
 
 const auth: AuthApiUnitFactory = (httpService: HttpClient): AuthApiUnit => ({
   login(credentials: Payload): Promise<any> {
-    const url = 'login';
+    const url = 'auth/login';
     const extraConfig = { secure: false };
     return httpService.post(url, credentials, extraConfig);
   },
   logout(): Promise<void> {
-    const url = 'logout';
+    const url = 'auth/logout';
     return httpService.post(url);
   },
   refresh(): Promise<any> {
-    const url = 'refresh';
+    const url = 'auth/refresh';
     return httpService.post(url);
   },
 });

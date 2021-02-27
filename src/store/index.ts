@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
 
 import tags from '@/store/modules/tags';
+import user from '@/store/modules/user';
 import alerts from '@/store/modules/alerts';
 import categories from '@/store/modules/categories';
 
@@ -19,6 +20,7 @@ const storeOptions: StoreOptions<RootState> = {
   },
   modules: {
     tags,
+    user,
     alerts,
     categories,
   },
