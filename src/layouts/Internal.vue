@@ -73,38 +73,37 @@
 </template>
 
 <script lang="ts">
-import { Container } from 'typedi';
-import { Component, Vue } from 'vue-property-decorator';
+  import { Container } from 'typedi';
+  import { Component, Vue } from 'vue-property-decorator';
 
-import menuItems from '@/constants/menuItems';
-import tokens from '@/services/tokens';
-import type { Loading } from '@/typings/misc';
+  import menuItems from '@/constants/menuItems';
+  import tokens from '@/services/tokens';
+  import type { Loading } from '@/typings/misc';
 
-import AlertManager from '@/components/common/AlertManager.vue';
+  import AlertManager from '@/components/common/AlertManager.vue';
 
-@Component({
-  components: {
-    AlertManager,
-  },
-})
-export default class Internal extends Vue {
-  drawer = true;
+  @Component({
+    components: {
+      AlertManager,
+    },
+  })
+  export default class Internal extends Vue {
+    drawer = true;
 
-  menuItems: Record<string, any>[] = menuItems;
+    menuItems: Record<string, any>[] = menuItems;
 
-  loading: Loading = {
-    logout: false,
-  };
+    loading: Loading = {
+      logout: false,
+    };
 
-  async logout() {
-    try {
-      this.loading.logout = true;
-      await Container.get(tokens.AUTH_SERVICE).logout();
-      // await Container.get(tokens.ROOT_SERVICE).resetState(); TODO !!!
-      await this.$router.push({ name: 'login' });
-    } finally {
-      this.loading.logout = false;
+    async logout() {
+      try {
+        this.loading.logout = true;
+        await Container.get(tokens.AUTH_SERVICE).logout();
+        await this.$router.push({ name: 'login' });
+      } finally {
+        this.loading.logout = false;
+      }
     }
   }
-}
 </script>

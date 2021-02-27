@@ -9,6 +9,7 @@ import CategoriesService from '@/services/CategoriesService';
 import UsersService from '@/services/UsersService';
 import TranslationService from '@/services/TranslationService';
 import PostsService from '@/services/PostsService';
+import RootService from '@/services/RootService';
 
 import { AppStore } from '@/typings/store';
 
@@ -23,4 +24,5 @@ export default {
   USERS_SERVICE: new Token<UsersService>(),
   TRANSLATION_SERVICE: new Token<TranslationService>(),
   POSTS_SERVICE: new Token<PostsService>(),
+  ROOT_SERVICE: new Token<RootService>(),
 };

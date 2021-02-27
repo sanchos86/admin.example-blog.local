@@ -22,7 +22,7 @@ const mutations: MutationTree<AlertsState> = {
   },
   removeAlert(state, alert: Alert) {
     state.alerts = state.alerts.filter((el) => alert.created !== el.created);
-  }
+  },
 };
 
 const alerts: Module<AlertsState, RootState> = {

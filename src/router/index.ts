@@ -13,8 +13,8 @@ const routes: Array<RouteConfig> = [
   ...auth,
   {
     path: '*',
-    redirect: { name: 'home' }
-  }
+    redirect: { name: 'home' },
+  },
 ];
 
 const router = new VueRouter({
@@ -32,13 +32,12 @@ router.beforeEach((to, from, next) => {
     to,
     from,
     next,
-    store
+    store,
   };
   return middleware[0]({
     ...context,
-    next: pipeline(context, middleware, 1)
+    next: pipeline(context, middleware, 1),
   });
 });
-
 
 export default router;

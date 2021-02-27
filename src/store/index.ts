@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuex, { StoreOptions } from 'vuex';
+import Vuex, { StoreOptions, ActionTree } from 'vuex';
 
 import tags from '@/store/modules/tags';
 import user from '@/store/modules/user';
@@ -10,14 +10,22 @@ import { RootState, AppStore } from '@/typings/store';
 
 Vue.use(Vuex);
 
+const actions: ActionTree<RootState, RootState> = {
+  resetState({ commit }) {
+    commit('tags/resetState');
+    commit('user/resetState');
+    commit('alerts/resetState');
+    commit('categories/resetState');
+  },
+};
+
 const storeOptions: StoreOptions<RootState> = {
   state: {
     language: 'ru',
   },
   mutations: {
   },
-  actions: {
-  },
+  actions,
   modules: {
     tags,
     user,
