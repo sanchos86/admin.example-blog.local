@@ -1,22 +1,55 @@
 <template>
-  <div class="tags">Tags</div>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="11">
+        <h1 class="text-h4">Теги</h1>
+      </v-col>
+      <v-col class="text-right" cols="1">
+        <NewTagModal />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <TagsTable
+          :tags="tags"
+          :loading="loading.getTags"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
-  import { Container } from 'typedi';
   import { Component, Vue } from 'vue-property-decorator';
+  import { Container } from 'typedi';
+  import { State } from 'vuex-class';
 
+  import Tag from '@/models/Tag';
   import tokens from '@/services/tokens';
+  import type { Loading } from '@/typings/misc';
 
-  @Component
+  import TagsTable from '@/components/internal/tags/TagsTable.vue';
+  import NewTagModal from '@/components/internal/tags/modals/NewTagModal.vue';
+
+  @Component({
+    components: {
+      TagsTable,
+      NewTagModal,
+    },
+  })
   export default class Tags extends Vue {
+    loading: Loading = {
+      getTags: true,
+    };
+
+    @State('tags', { namespace: 'tags' }) tags!: Tag[];
+
     async created() {
-      const s = await Container.get(tokens.TAGS_SERVICE).getTags();
-      console.log(s);
+      try {
+        await Container.get(tokens.TAGS_SERVICE).getTags();
+      } finally {
+        this.loading.getTags = false;
+      }
     }
   }
 </script>
-
-<style scoped>
-
-</style>

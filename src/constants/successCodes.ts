@@ -11,5 +11,5 @@ export default {
   DELETE_TAG: 'Тег удален',
 
   // Posts
-  DELETE_POST: 'Запись удалена'
+  DELETE_POST: 'Запись удалена',
 };

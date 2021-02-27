@@ -29,7 +29,6 @@ export default class TagsService {
     const payload = Tag.getPayloadToAddTag(data);
     let newTag = await this.baseApiService.tags.addTag(payload);
     newTag = new Tag(newTag);
-    this.store.commit('tags/addTag', newTag);
     return newTag;
   }
 
