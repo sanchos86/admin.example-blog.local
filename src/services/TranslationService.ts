@@ -8,6 +8,7 @@ export default class TranslationService {
   }
 
   t(key: Path, values?: Values) {
+    console.log('key', key);
     if (this.i18n.te(key)) {
       return this.i18n.t(key, values);
     }

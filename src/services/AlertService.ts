@@ -29,21 +29,21 @@ export default class AlertService {
 
   addSuccessAlert(code: string, details?: string) {
     const finalCode = code || successCodes.UNKNOWN;
-    const text = this.translationService.t(finalCode);
+    const text = this.translationService.getSuccessMessage(finalCode);
     const alert = new Alert(AlertType.SUCCESS, { text, details });
     this.addAlert(alert);
   }
 
   addErrorAlert(code: string, details?: string) {
     const finalCode = code || errorCodes.UNKNOWN;
-    const text = this.translationService.t(finalCode);
+    const text = this.translationService.getErrorMessage(finalCode);
     const alert = new Alert(AlertType.ERROR, { text, details });
     this.addAlert(alert);
   }
 
   addInfoAlert(code: string, details?: string) {
     const finalCode = code || infoCodes.UNKNOWN;
-    const text = this.translationService.t(finalCode);
+    const text = this.translationService.getInfoMessage(finalCode);
     const alert = new Alert(AlertType.INFO, { text, details });
     this.addAlert(alert);
   }

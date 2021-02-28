@@ -1,15 +1,15 @@
 export default {
-  UNKNOWN: 'Успех',
+  UNKNOWN: 'UNKNOWN',
 
   // Categories
-  ADD_CATEGORY: 'Добавлена новая категория',
-  EDIT_CATEGORY: 'Категория изменена',
+  ADD_CATEGORY: 'ADD_CATEGORY',
+  EDIT_CATEGORY: 'EDIT_CATEGORY',
 
   // Tags
-  ADD_TAG: 'Добавлен новый тег',
-  EDIT_TAG: 'Тег изменен',
-  DELETE_TAG: 'Тег удален',
+  ADD_TAG: 'ADD_TAG',
+  EDIT_TAG: 'EDIT_TAG',
+  DELETE_TAG: 'DELETE_TAG',
 
   // Posts
-  DELETE_POST: 'Запись удалена',
+  DELETE_POST: 'DELETE_POST',
 };
