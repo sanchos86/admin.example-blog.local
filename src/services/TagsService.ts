@@ -36,7 +36,7 @@ export default class TagsService {
     const payload = Tag.getPayloadToEditTag(data);
     let editedTag = await this.baseApiService.tags.editTag(tagId, payload);
     editedTag = new Tag(editedTag);
-    this.store.commit('tags/editTag', editedTag);
+    this.store.commit('tags/updateTag', editedTag);
     return editedTag;
   }
 

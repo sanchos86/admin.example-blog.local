@@ -122,15 +122,17 @@
     }
 
     async addTag() {
-      const { form } = this;
-      try {
-        this.loading.addTag = true;
-        await Container.get(tokens.TAGS_SERVICE).addTag(form);
-        await Container.get(tokens.TAGS_SERVICE).getTags();
-        await Container.get(tokens.ALERTS_SERVICE).addSuccessAlert(successCodes.ADD_TAG);
-        this.isDialogOpened = false;
-      } finally {
-        this.loading.addTag = false;
+      const { form, isFormInvalid } = this;
+      if (!isFormInvalid) {
+        try {
+          this.loading.addTag = true;
+          await Container.get(tokens.TAGS_SERVICE).addTag(form);
+          await Container.get(tokens.TAGS_SERVICE).getTags();
+          Container.get(tokens.ALERTS_SERVICE).addSuccessAlert(successCodes.ADD_TAG);
+          this.isDialogOpened = false;
+        } finally {
+          this.loading.addTag = false;
+        }
       }
     }
   }

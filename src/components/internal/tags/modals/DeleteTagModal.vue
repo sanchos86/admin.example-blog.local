@@ -56,7 +56,7 @@
       try {
         this.loading.deleteTag = true;
         await Container.get(tokens.TAGS_SERVICE).deleteTag(this.tag.id);
-        await Container.get(tokens.ALERTS_SERVICE).addSuccessAlert(successCodes.DELETE_TAG);
+        Container.get(tokens.ALERTS_SERVICE).addSuccessAlert(successCodes.DELETE_TAG);
         this.isDialogOpened = false;
       } finally {
         this.loading.deleteTag = false;

@@ -4,6 +4,7 @@ import successMessages from '@/i18n/ru/successMessages';
 import validationMessages from '@/i18n/ru/validationMessages';
 import auth from '@/i18n/ru/auth/auth';
 import internal from '@/i18n/ru/internal/internal';
+import controls from '@/i18n/ru/controls';
 
 export default {
   infoMessages,
@@ -12,4 +13,5 @@ export default {
   validationMessages,
   auth,
   internal,
+  controls,
 };
