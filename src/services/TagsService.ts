@@ -41,7 +41,7 @@ export default class TagsService {
   }
 
   async deleteTag(tagId: number): Promise<void> {
-    const deletedTagId = await this.baseApiService.tags.deleteTag(tagId);
-    this.store.commit('tags/deleteTag', deletedTagId);
+    await this.baseApiService.tags.deleteTag(tagId);
+    this.store.commit('tags/deleteTag', tagId);
   }
 }
