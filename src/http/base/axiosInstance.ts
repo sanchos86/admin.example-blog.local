@@ -6,7 +6,7 @@ import tokens from '@/services/tokens';
 
 import { MimeType } from '@/typings/enum';
 
-const baseURL = 'http://18.198.203.176/api';
+const baseURL = 'http://localhost/api';
 
 const instance: AxiosInstance = axios.create({
   baseURL,
