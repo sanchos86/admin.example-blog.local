@@ -17,7 +17,7 @@ export default class CategoriesService {
   async getCategories(): Promise<Category[]> {
     let categories = await this.baseApiService.categories.getCategories();
     categories = categories.map((el: any) => new Category(el));
-    await this.store.dispatch('categories/setCategories', categories);
+    this.store.commit('categories/setCategories', categories);
     return categories;
   }
 

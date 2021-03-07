@@ -4,29 +4,29 @@
       <v-tooltip left>
         <template v-slot:activator="{ on: tooltip }">
           <v-btn
-              color="primary"
-              v-bind="attrs"
-              v-on="{ ...dialog, ...tooltip }"
-              small
-              fab
+            color="primary"
+            v-bind="attrs"
+            v-on="{ ...dialog, ...tooltip }"
+            small
+            fab
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </template>
-        <span>Добавить тег</span>
+        <span>Добавить категорию</span>
       </v-tooltip>
     </template>
     <v-card>
-      <v-card-title>Новый тег</v-card-title>
+      <v-card-title>Новая категория</v-card-title>
       <v-card-text>
-        <form id="newTag" @submit.prevent="addTag">
+        <form id="newCategory" @submit.prevent="addCategory">
           <v-container class="pa-0">
             <v-row>
               <v-col class="py-0">
                 <v-text-field
                   v-model="$v.form.name.$model"
-                  :label="$t('internal.tags.newTag.labels.name')"
-                  :placeholder="$t('internal.tags.newTag.placeholders.name')"
+                  :label="$t('internal.categories.newCategory.labels.name')"
+                  :placeholder="$t('internal.categories.newCategory.placeholders.name')"
                   :error-messages="$getValidationMessage($v.form.name)"
                 />
               </v-col>
@@ -35,8 +35,8 @@
               <v-col class="py-0">
                 <v-text-field
                   v-model="$v.form.slug.$model"
-                  :label="$t('internal.tags.newTag.labels.slug')"
-                  :placeholder="$t('internal.tags.newTag.placeholders.slug')"
+                  :label="$t('internal.categories.newCategory.labels.slug')"
+                  :placeholder="$t('internal.categories.newCategory.placeholders.slug')"
                   :error-messages="$getValidationMessage($v.form.slug)"
                 />
               </v-col>
@@ -50,10 +50,10 @@
         <v-btn
           color="primary"
           type="submit"
-          form="newTag"
+          form="newCategory"
           small
-          :disabled="isFormInvalid || loading.addTag"
-          :loading="loading.addTag"
+          :disabled="isFormInvalid || loading.addCategory"
+          :loading="loading.addCategory"
         >
           Сохранить
         </v-btn>
@@ -63,33 +63,33 @@
 </template>
 
 <script lang="ts">
-  import { Component, Watch } from 'vue-property-decorator';
-  import { mixins } from 'vue-class-component';
   import { Container } from 'typedi';
   import { required, minLength } from 'vuelidate/lib/validators';
+  import { Component, Watch } from 'vue-property-decorator';
+  import { mixins } from 'vue-class-component';
 
-  import tokens from '@/services/tokens';
   import ValidationMixin from '@/mixins/ValidationMixin';
   import type { Loading } from '@/typings/misc';
+  import tokens from '@/services/tokens';
   import successCodes from '@/constants/successCodes';
 
-  interface TagForm {
+  interface NewCategoryForm {
     name: string;
     slug: string;
   }
 
   @Component
-  export default class NewTagModal extends mixins(ValidationMixin) {
-    isDialogOpened = false;
-
-    loading: Loading = {
-      addTag: false,
-    };
-
-    form: TagForm = {
+  export default class NewCategoryModal extends mixins(ValidationMixin) {
+    form: NewCategoryForm = {
       name: '',
       slug: '',
     };
+
+    loading: Loading = {
+      addCategory: false,
+    };
+
+    isDialogOpened = false;
 
     validations() {
       return {
@@ -121,18 +121,16 @@
       }
     }
 
-    async addTag() {
-      const { form, isFormInvalid } = this;
-      if (!isFormInvalid) {
-        try {
-          this.loading.addTag = true;
-          await Container.get(tokens.TAGS_SERVICE).addTag(form);
-          await Container.get(tokens.TAGS_SERVICE).getTags();
-          Container.get(tokens.ALERTS_SERVICE).addSuccessAlert(successCodes.ADD_TAG);
-          this.isDialogOpened = false;
-        } finally {
-          this.loading.addTag = false;
-        }
+    async addCategory() {
+      const { form } = this;
+      try {
+        this.loading.addCategory = true;
+        await Container.get(tokens.CATEGORIES_SERVICE).addCategory(form);
+        await Container.get(tokens.CATEGORIES_SERVICE).getCategories();
+        await Container.get(tokens.ALERTS_SERVICE).addSuccessAlert(successCodes.ADD_CATEGORY);
+        this.isDialogOpened = false;
+      } finally {
+        this.loading.addCategory = false;
       }
     }
   }

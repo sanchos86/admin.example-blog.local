@@ -6,24 +6,24 @@
       </template>
       <v-card>
         <v-card-title>Удалить тег</v-card-title>
-        <v-card-text class="px-3 pb-0">
-          <v-container class="py-0">
+        <v-card-text>
+          <v-container class="pa-0">
             <v-row>
-              <v-col class="pt-0">
+              <v-col class="py-0">
                 <span class="subtitle-2">Вы действительно хотите удалить тег {{ tag.name }}?</span>
               </v-col>
             </v-row>
           </v-container>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="px-6 pb-4">
           <v-spacer></v-spacer>
           <v-btn @click="isDialogOpened = false" small>Отмена</v-btn>
           <v-btn
-              color="red"
-              class="white--text"
-              small
-              :loading="loading.deleteTag"
-              @click="deleteTag"
+            color="red"
+            class="white--text"
+            small
+            :loading="loading.deleteTag"
+            @click="deleteTag"
           >
             Удалить
           </v-btn>

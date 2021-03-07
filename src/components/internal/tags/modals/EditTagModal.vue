@@ -47,7 +47,7 @@
             type="submit"
             form="editTag"
             small
-            :disabled="isFormInvalid"
+            :disabled="isFormInvalid || loading.editTag"
             :loading="loading.editTag"
           >
             {{ $t('controls.edit') }}
@@ -110,7 +110,7 @@
     }
 
     @Watch('isDialogOpened')
-    onIsDialogOpened(newValue: boolean) {
+    resetForm(newValue: boolean) {
       const { tag } = this;
       if (newValue && tag) {
         this.form = {
