@@ -29,10 +29,10 @@
           :post="item"
           @publish-post="$emit('publish-post')"
         />
-<!--        <DeletePostModal-->
-<!--          :post="item"-->
-<!--          @delete-post="$emit('delete-post')"-->
-<!--        />-->
+        <DeletePostModal
+          :post="item"
+          @delete-post="$emit('delete-post')"
+        />
       </div>
       <div class="d-flex pb-2">
         <v-btn
@@ -54,10 +54,12 @@
   import Post from '@/models/Post';
 
   import PublishPost from '@/components/internal/posts/PublishPost.vue';
+  import DeletePostModal from '@/components/internal/posts/DeletePostModal.vue';
 
   @Component({
     components: {
       PublishPost,
+      DeletePostModal,
     },
   })
   export default class PostsTable extends Vue {
