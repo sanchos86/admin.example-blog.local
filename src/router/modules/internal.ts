@@ -29,49 +29,49 @@ const internal: Array<RouteConfig> = [
         name: 'tags',
         component: Tags,
         meta: {
-          middleware: [auth]
-        }
+          middleware: [auth],
+        },
       },
       {
         path: 'posts',
         name: 'posts',
         component: Posts,
         meta: {
-          middleware: [auth]
-        }
+          middleware: [auth],
+        },
       },
       {
         path: 'posts/new',
         name: 'new-post',
         component: NewPost,
         meta: {
-          middleware: [auth]
-        }
+          middleware: [auth],
+        },
       },
       {
         path: 'posts/:slug',
         name: 'edit-post',
         component: EditPost,
         meta: {
-          middleware: [auth]
-        }
+          middleware: [auth],
+        },
       },
       {
         path: 'categories',
         name: 'categories',
         component: Categories,
         meta: {
-          middleware: [auth]
-        }
+          middleware: [auth],
+        },
       },
       {
         path: 'profile',
         name: 'profile',
         component: Profile,
         meta: {
-          middleware: [auth]
-        }
-      }
+          middleware: [auth],
+        },
+      },
     ],
   },
 ];

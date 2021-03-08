@@ -13,4 +13,6 @@ export default {
 
   // Posts
   DELETE_POST: 'DELETE_POST',
+  PUBLISH_POST: 'PUBLISH_POST',
+  UNPUBLISH_POST: 'UNPUBLISH_POST',
 };

@@ -33,6 +33,10 @@ export default class Post {
     this.tags = (data.tags || []).map((tag: any) => new Tag(tag));
   }
 
+  get tagsNames() {
+    return this.tags.map((el) => el.name);
+  }
+
   static getPayloadToAddPost(data: any = {}): Payload {
     return {};
   }

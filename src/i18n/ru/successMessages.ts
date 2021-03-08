@@ -13,4 +13,6 @@ export default {
 
   // Posts
   DELETE_POST: 'Запись удалена',
+  PUBLISH_POST: 'Запись опубликована',
+  UNPUBLISH_POST: 'Публикация записи отменена',
 };
