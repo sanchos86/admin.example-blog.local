@@ -9,6 +9,7 @@ export interface CategoriesApiUnit extends ApiUnit {
   getCategories(): Promise<any>;
   addCategory(payload: Payload): Promise<any>;
   editCategory(categoryId: number, payload: Payload): Promise<any>;
+  deleteCategory(categoryId: number): Promise<any>;
 }
 
 export interface CategoriesApiUnitFactory extends ApiUnitFactory {
@@ -27,6 +28,10 @@ const categories: CategoriesApiUnitFactory = (httpService: HttpClient): Categori
   editCategory(categoryId: number, payload: Payload): Promise<any> {
     const url = `categories/${categoryId}`;
     return httpService.put(url, payload);
+  },
+  deleteCategory(categoryId: number): Promise<any> {
+    const url = `categories/${categoryId}`;
+    return httpService.delete(url);
   },
 });
 

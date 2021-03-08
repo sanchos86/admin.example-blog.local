@@ -4,6 +4,7 @@ export default {
   // Categories
   ADD_CATEGORY: 'ADD_CATEGORY',
   EDIT_CATEGORY: 'EDIT_CATEGORY',
+  DELETE_CATEGORY: 'DELETE_CATEGORY',
 
   // Tags
   ADD_TAG: 'ADD_TAG',

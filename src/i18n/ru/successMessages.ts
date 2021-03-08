@@ -4,6 +4,7 @@ export default {
   // Categories
   ADD_CATEGORY: 'Добавлена новая категория',
   EDIT_CATEGORY: 'Категория изменена',
+  DELETE_CATEGORY: 'Категория удалена',
 
   // Tags
   ADD_TAG: 'Добавлен новый тег',

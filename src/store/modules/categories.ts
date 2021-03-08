@@ -25,6 +25,9 @@ const mutations: MutationTree<CategoriesState> = {
       return el;
     });
   },
+  deleteCategory(state, categoryId: number) {
+    state.categories = state.categories.filter((el: Category) => el.id !== categoryId);
+  },
 };
 
 const categories: Module<CategoriesState, RootState> = {

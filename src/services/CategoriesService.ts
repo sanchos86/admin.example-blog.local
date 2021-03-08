@@ -33,4 +33,9 @@ export default class CategoriesService {
     this.store.commit('categories/updateCategory', editedCategory);
     return editedCategory;
   }
+
+  async deleteCategory(categoryId: number): Promise<void> {
+    await this.baseApiService.categories.deleteCategory(categoryId);
+    this.store.commit('categories/deleteCategory', categoryId);
+  }
 }

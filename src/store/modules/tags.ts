@@ -26,7 +26,7 @@ const mutations: MutationTree<TagsState> = {
     });
   },
   deleteTag(state, tagId: number) {
-    state.tags = state.tags.filter((el) => el.id !== tagId);
+    state.tags = state.tags.filter((el: Tag) => el.id !== tagId);
   },
 };
 

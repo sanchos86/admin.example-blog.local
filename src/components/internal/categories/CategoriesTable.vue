@@ -6,7 +6,8 @@
     :loading="loading"
   >
     <template v-slot:item.controls="{ item }">
-      <EditCategoryModal :category="item" />
+      <EditCategoryModal class="mr-2" :category="item" />
+      <DeleteCategoryModal :category="item" />
     </template>
   </v-data-table>
 </template>
@@ -18,10 +19,12 @@
   import Category from '@/models/Category';
 
   import EditCategoryModal from '@/components/internal/categories/modals/EditCategoryModal.vue';
+  import DeleteCategoryModal from '@/components/internal/categories/modals/DeleteCategoryModal.vue';
 
   @Component({
     components: {
       EditCategoryModal,
+      DeleteCategoryModal,
     },
   })
   export default class CategoriesTable extends Vue {
