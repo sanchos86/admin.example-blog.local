@@ -38,7 +38,19 @@ export default class Post {
   }
 
   static getPayloadToAddPost(data: any = {}): Payload {
-    return {};
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('text', data.text);
+    formData.append('slug', data.slug);
+    formData.append('publish', data.publish);
+    formData.append('category_id', data.category);
+    formData.append('picture', data.picture);
+
+    data.tags.forEach((tag: number) => {
+      formData.append('tags[]', String(tag));
+    });
+
+    return formData;
   }
 
   static getPayloadToEditPost(data: any = {}): Payload {

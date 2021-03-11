@@ -24,7 +24,7 @@ export default class PostsService {
 
   async addPost(data: any): Promise<Post> {
     const payload = Post.getPayloadToAddPost(data);
-    const post = await this.baseApiService.posts.createPost(payload);
+    const post = await this.baseApiService.posts.addPost(payload);
     return new Post(post);
   }
 

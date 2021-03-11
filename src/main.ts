@@ -4,6 +4,8 @@ import Vue from 'vue';
 import dayjs from 'dayjs';
 import { Container } from 'typedi';
 import Vuelidate from 'vuelidate';
+// @ts-ignore
+import VueQuillEditor from 'vue-quill-editor';
 import i18n from '@/i18n/i18n';
 import App from '@/App.vue';
 import router from '@/router';
@@ -14,11 +16,14 @@ import tokens from '@/services/tokens';
 import '@/DI';
 import '@/filters/filters';
 import 'dayjs/locale/ru';
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css';
 
 dayjs.locale('ru');
 dayjs.extend(localizedFormat);
 
 Vue.use(Vuelidate);
+Vue.use(VueQuillEditor);
 
 Vue.prototype.dayjs = dayjs;
 Vue.config.productionTip = false;

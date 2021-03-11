@@ -54,7 +54,15 @@
                 />
               </v-col>
             </v-row>
-            <v-row></v-row>
+            <v-row>
+              <v-col>
+                <quill-editor
+                  ref="editor"
+                  v-model="form.text"
+                  :options="editorOptions"
+                />
+              </v-col>
+            </v-row>
             <v-row class="align-center">
               <v-col cols="6">
                 <v-checkbox
@@ -115,6 +123,10 @@
       addPost: false,
     };
 
+    editorOptions = {
+      placeholder: 'Введите текст...',
+    };
+
     form: NewPostForm = {
       title: undefined,
       text: undefined,
@@ -155,9 +167,22 @@
       return this.$v.form.$invalid;
     }
 
+    get editor() {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      return this.$refs.editor?.quill;
+    }
+
     async addPost() {
-      const { isFormInvalid } = this;
+      const { isFormInvalid, form } = this;
       if (!isFormInvalid) {
+        try {
+          this.loading.addPost = true;
+          await Container.get(tokens.POSTS_SERVICE).addPost(form);
+          await this.$router.push({ name: 'posts' });
+        } finally {
+          this.loading.addPost = false;
+        }
       } else {
         this.$v.form.$touch();
       }
@@ -169,3 +194,9 @@
     }
   }
 </script>
+
+<style>
+  .ql-container {
+    min-height: 200px;
+  }
+</style>
