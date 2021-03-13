@@ -45,6 +45,7 @@ export default class Post {
     formData.append('publish', String(Number(data.publish)));
     formData.append('category_id', String(data.category));
     formData.append('picture', data.picture);
+    formData.append('plain_text', data.plainText);
 
     data.tags.forEach((tag: number) => {
       formData.append('tags[]', String(tag));

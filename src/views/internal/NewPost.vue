@@ -102,6 +102,7 @@
   import Category from '@/models/Category';
   import tokens from '@/services/tokens';
   import ValidationMixin from '@/mixins/ValidationMixin';
+  import successCodes from '@/constants/successCodes';
 
   interface NewPostForm {
     title: string | undefined;
@@ -125,6 +126,17 @@
 
     editorOptions = {
       placeholder: 'Введите текст...',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['code-block', 'blockquote', 'code'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ indent: '-1' }, { indent: '+1' }],
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          [{ align: [false, 'center', 'right', 'justify'] }],
+          ['link'],
+        ],
+      },
     };
 
     form: NewPostForm = {
@@ -174,11 +186,16 @@
     }
 
     async addPost() {
-      const { isFormInvalid, form } = this;
+      const { isFormInvalid, form, editor } = this;
       if (!isFormInvalid) {
         try {
           this.loading.addPost = true;
-          await Container.get(tokens.POSTS_SERVICE).addPost(form);
+          const data = {
+            ...form,
+            plainText: editor.getText(),
+          };
+          await Container.get(tokens.POSTS_SERVICE).addPost(data);
+          Container.get(tokens.ALERTS_SERVICE).addSuccessAlert(successCodes.ADD_POST);
           await this.$router.push({ name: 'posts' });
         } finally {
           this.loading.addPost = false;

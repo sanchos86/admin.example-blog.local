@@ -4,6 +4,7 @@ import Vue from 'vue';
 import dayjs from 'dayjs';
 import { Container } from 'typedi';
 import Vuelidate from 'vuelidate';
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import VueQuillEditor from 'vue-quill-editor';
 import i18n from '@/i18n/i18n';
@@ -16,8 +17,10 @@ import tokens from '@/services/tokens';
 import '@/DI';
 import '@/filters/filters';
 import 'dayjs/locale/ru';
+/* eslint-disable import/no-extraneous-dependencies */
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
+/* eslint-enable import/no-extraneous-dependencies */
 
 dayjs.locale('ru');
 dayjs.extend(localizedFormat);
@@ -41,11 +44,11 @@ const init = async () => {
         await userServices.getProfile();
       } catch (e) {
         tokenService.removeAccessToken();
-        tokenService.removeExpirationDate()
+        tokenService.removeExpirationDate();
       }
     } else {
       tokenService.removeAccessToken();
-      tokenService.removeExpirationDate()
+      tokenService.removeExpirationDate();
     }
   }
 };
