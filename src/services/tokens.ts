@@ -10,6 +10,7 @@ import UsersService from '@/services/UsersService';
 import TranslationService from '@/services/TranslationService';
 import PostsService from '@/services/PostsService';
 import RootService from '@/services/RootService';
+import ProgressService from '@/services/ProgressService';
 
 import { AppStore } from '@/typings/store';
 
@@ -25,4 +26,5 @@ export default {
   TRANSLATION_SERVICE: new Token<TranslationService>(),
   POSTS_SERVICE: new Token<PostsService>(),
   ROOT_SERVICE: new Token<RootService>(),
+  PROGRESS_SERVICE: new Token<ProgressService>(),
 };

@@ -58,7 +58,7 @@
               <v-col>
                 <quill-editor
                   ref="editor"
-                  v-model="form.text"
+                  v-model="$v.form.text.$model"
                   :options="editorOptions"
                 />
               </v-col>

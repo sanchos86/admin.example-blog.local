@@ -18,6 +18,7 @@ import '@/services/TagsService';
 import '@/services/TokenService';
 import '@/services/UsersService';
 import '@/services/RootService';
+import '@/services/ProgressService';
 
 const httpService = new AxiosService(baseAxiosInstance);
 

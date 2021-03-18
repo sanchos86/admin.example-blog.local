@@ -16,4 +16,5 @@ export default {
   PUBLISH_POST: 'Запись опубликована',
   UNPUBLISH_POST: 'Публикация записи отменена',
   ADD_POST: 'Добавлена новая запись',
+  EDIT_POST: 'Запись изменена',
 };

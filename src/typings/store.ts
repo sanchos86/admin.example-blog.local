@@ -26,3 +26,8 @@ export interface TagsState {
 export interface UserState {
   user: User | null;
 }
+
+export interface ProgressState {
+  isActiveGlobalProgress: boolean;
+  progress: Map<string, boolean | undefined>;
+}

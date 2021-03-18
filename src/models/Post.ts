@@ -37,14 +37,17 @@ export default class Post {
     return this.tags.map((el) => el.name);
   }
 
-  static getPayloadToAddPost(data: any = {}): Payload {
+  get tagsIds() {
+    return this.tags.map((el) => el.id);
+  }
+
+  static getPayload(data: any = {}): Payload {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('text', data.text);
     formData.append('slug', data.slug);
     formData.append('publish', String(Number(data.publish)));
     formData.append('category_id', String(data.category));
-    formData.append('picture', data.picture);
     formData.append('plain_text', data.plainText);
 
     data.tags.forEach((tag: number) => {
@@ -54,7 +57,21 @@ export default class Post {
     return formData;
   }
 
+  static getPayloadToAddPost(data: any = {}): Payload {
+    const formData = this.getPayload(data);
+    formData.append('picture', data.picture);
+    return formData;
+  }
+
   static getPayloadToEditPost(data: any = {}): Payload {
-    return {};
+    const formData = this.getPayload(data);
+
+    formData.append('_method', 'PUT');
+
+    if (data.picture instanceof File) {
+      formData.append('picture', data.picture);
+    }
+
+    return formData;
   }
 }

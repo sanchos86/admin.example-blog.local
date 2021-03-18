@@ -69,12 +69,16 @@
         <span>Выход</span>
       </v-tooltip>
     </v-app-bar>
+    <v-overlay :value="isActiveGlobalProgress">
+      <v-progress-circular indeterminate />
+    </v-overlay>
   </v-app>
 </template>
 
 <script lang="ts">
   import { Container } from 'typedi';
   import { Component, Vue } from 'vue-property-decorator';
+  import { State } from 'vuex-class';
 
   import menuItems from '@/constants/menuItems';
   import tokens from '@/services/tokens';
@@ -88,6 +92,8 @@
     },
   })
   export default class Internal extends Vue {
+    @State('isActiveGlobalProgress', { namespace: 'progress' }) isActiveGlobalProgress!: boolean;
+
     drawer = true;
 
     menuItems: Record<string, any>[] = menuItems;

@@ -5,6 +5,7 @@ import tags from '@/store/modules/tags';
 import user from '@/store/modules/user';
 import alerts from '@/store/modules/alerts';
 import categories from '@/store/modules/categories';
+import progress from '@/store/modules/progress';
 
 import { RootState, AppStore } from '@/typings/store';
 
@@ -16,6 +17,7 @@ const actions: ActionTree<RootState, RootState> = {
     commit('user/resetState');
     commit('alerts/resetState');
     commit('categories/resetState');
+    commit('progress/resetState');
   },
 };
 
@@ -31,6 +33,7 @@ const storeOptions: StoreOptions<RootState> = {
     user,
     alerts,
     categories,
+    progress,
   },
 };
 

@@ -34,7 +34,7 @@ const posts: PostsApiUnitFactory = (httpService: HttpClient): PostsApiUnit => ({
   },
   editPost(postId: number, payload: Payload): Promise<any> {
     const url = `posts/${postId}`;
-    return httpService.put(url, payload);
+    return httpService.post(url, payload);
   },
   publishPost(postId: number, payload: Payload): Promise<any> {
     const url = `posts/${postId}/publish`;
