@@ -86,7 +86,7 @@
           </v-container>
         </form>
       </v-col>
-      <v-col cols="2">
+      <v-col cols="4">
         <v-img v-if="form.src" max-width="100%" :src="form.src">
           <v-btn
             class="edit-post__remove-picture-icon"
@@ -111,6 +111,7 @@
   import { State } from 'vuex-class';
   import { mixins } from 'vue-class-component';
   import { minLength, required, requiredIf } from 'vuelidate/lib/validators';
+  import hljs from 'highlight.js';
 
   import tokens from '@/services/tokens';
   import type { Loading } from '@/typings/misc';
@@ -132,6 +133,10 @@
     src: string | undefined;
   }
 
+  hljs.configure({
+    useBR: false,
+  });
+
   @Component
   export default class EditPost extends mixins(ValidationMixin) {
     @State('tags', { namespace: 'tags' }) tags!: Tag[];
@@ -145,6 +150,9 @@
     editorOptions = {
       placeholder: 'Введите текст...',
       modules: {
+        syntax: {
+          highlight: (text: never) => hljs.highlightAuto(text).value,
+        },
         toolbar: [
           ['bold', 'italic', 'underline', 'strike'],
           ['code-block', 'blockquote', 'code'],

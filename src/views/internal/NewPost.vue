@@ -96,6 +96,7 @@
   import { Container } from 'typedi';
   import { required, minLength } from 'vuelidate/lib/validators';
   import { mixins } from 'vue-class-component';
+  import hljs from 'highlight.js';
 
   import type { Loading } from '@/typings/misc';
   import Tag from '@/models/Tag';
@@ -114,6 +115,10 @@
     picture: File | undefined;
   }
 
+  hljs.configure({
+    useBR: false,
+  });
+
   @Component
   export default class NewPost extends mixins(ValidationMixin) {
     @State('tags', { namespace: 'tags' }) tags!: Tag[];
@@ -127,6 +132,9 @@
     editorOptions = {
       placeholder: 'Введите текст...',
       modules: {
+        syntax: {
+          highlight: (text: never) => hljs.highlightAuto(text).value,
+        },
         toolbar: [
           ['bold', 'italic', 'underline', 'strike'],
           ['code-block', 'blockquote', 'code'],

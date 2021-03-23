@@ -21,6 +21,7 @@ import 'dayjs/locale/ru';
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 /* eslint-enable import/no-extraneous-dependencies */
+import 'highlight.js/styles/ocean.css';
 
 dayjs.locale('ru');
 dayjs.extend(localizedFormat);

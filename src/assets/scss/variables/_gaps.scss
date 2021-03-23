@@ -4,5 +4,5 @@ $gap: 4px;
 $gaps: ();
 
 @for $i from 1 through 6 {
-  $gaps: map_merge($gaps, ($i: ($i / 4) * $gap));
+  $gaps: map_merge($gaps, ($i: $i * $gap));
 }
