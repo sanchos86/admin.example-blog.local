@@ -68,6 +68,7 @@
         await Container.get(tokens.CATEGORIES_SERVICE).deleteCategory(this.category.id);
         Container.get(tokens.ALERTS_SERVICE).addSuccessAlert(successCodes.DELETE_CATEGORY);
         this.isDialogOpened = false;
+      } catch (e) {
       } finally {
         this.loading.deleteCategory = false;
       }

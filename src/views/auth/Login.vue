@@ -90,7 +90,7 @@
           this.loading.login = true;
           await Container.get(tokens.AUTH_SERVICE).login(form);
           await Container.get(tokens.USERS_SERVICE).getProfile();
-          await this.$router.push({ name: 'home' });
+        } catch (e) {
         } finally {
           this.loading.login = false;
         }

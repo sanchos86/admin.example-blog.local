@@ -4,9 +4,11 @@ import tokens from '@/services/tokens';
 
 @Service(tokens.TOKEN_SERVICE)
 export default class TokenService {
-  private readonly accessTokenKey = 'web-artisan.ru_accessToken';
+  private readonly accessTokenKey = 'ACCESS_TOKEN';
 
-  private readonly expirationDateKey = 'web-artisan.ru_expirationDate';
+  private readonly expirationDateKey = 'EXPIRATION_DATE';
+
+  private readonly timeToRefresh = 1000 * 60; // ms * seconds
 
   setAccessToken(accessToken: string) {
     localStorage.setItem(this.accessTokenKey, accessToken);
@@ -37,5 +39,12 @@ export default class TokenService {
     const expirationDate = this.getExpirationDate();
     const now = Date.now();
     return expirationDate > now;
+  }
+
+  checkTokenValidForRefresh(): boolean {
+    const expirationDate = this.getExpirationDate();
+    const now = Date.now();
+    const diff = expirationDate - now;
+    return diff > 0 && diff < this.timeToRefresh;
   }
 }

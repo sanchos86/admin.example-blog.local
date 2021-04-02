@@ -19,7 +19,9 @@ module.exports = {
     'vue/script-indent': ['error', 2, {
       baseIndent: 1,
       switchCase: 1
-    }]
+    }],
+    'max-len': ['error', { code: 120 }],
+    'no-empty': ['error', { allowEmptyCatch: true }]
   },
   overrides: [
     {

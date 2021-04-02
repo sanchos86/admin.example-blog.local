@@ -106,7 +106,6 @@
       try {
         this.loading.logout = true;
         await Container.get(tokens.AUTH_SERVICE).logout();
-        await this.$router.push({ name: 'login' });
       } finally {
         this.loading.logout = false;
       }
