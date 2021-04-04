@@ -6,9 +6,8 @@ import {
 } from '@/typings/misc';
 
 export interface AuthApiUnit extends ApiUnit {
-  login(credentials: Payload): Promise<any>;
-  logout(): Promise<any>;
-  refresh(): Promise<any>;
+  login(payload: FormData): Promise<any>;
+  refresh(payload: FormData): Promise<any>;
 }
 
 export interface AuthApiUnitFactory extends ApiUnitFactory {
@@ -16,18 +15,15 @@ export interface AuthApiUnitFactory extends ApiUnitFactory {
 }
 
 const auth: AuthApiUnitFactory = (httpService: HttpClient): AuthApiUnit => ({
-  login(credentials: Payload): Promise<any> {
-    const url = 'auth/login';
+  login(payload: FormData): Promise<any> {
+    const url = 'api/oauth/token';
     const extraConfig = { secure: false };
-    return httpService.post(url, credentials, extraConfig);
+    return httpService.post(url, payload, extraConfig);
   },
-  logout(): Promise<void> {
-    const url = 'auth/logout';
-    return httpService.post(url);
-  },
-  refresh(): Promise<any> {
-    const url = 'auth/refresh';
-    return httpService.post(url);
+  refresh(payload: FormData): Promise<any> {
+    const url = 'api/oauth/token';
+    const extraConfig = { secure: false };
+    return httpService.post(url, payload, extraConfig);
   },
 });
 

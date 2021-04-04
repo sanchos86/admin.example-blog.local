@@ -18,19 +18,19 @@ export interface TagsApiUnitFactory extends ApiUnitFactory {
 
 const tags: TagsApiUnitFactory = (httpService: HttpClient): TagsApiUnit => ({
   getTags(): Promise<any> {
-    const url = 'tags';
+    const url = 'api/tags';
     return httpService.get(url);
   },
   addTag(payload: Payload): Promise<any> {
-    const url = 'tags';
+    const url = 'api/tags';
     return httpService.post(url, payload);
   },
   editTag(tagId: number, payload: Payload): Promise<any> {
-    const url = `tags/${tagId}`;
+    const url = `api/tags/${tagId}`;
     return httpService.put(url, payload);
   },
   deleteTag(tagId: number): Promise<any> {
-    const url = `tags/${tagId}`;
+    const url = `api/tags/${tagId}`;
     return httpService.delete(url);
   },
 });

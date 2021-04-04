@@ -3,10 +3,11 @@ import camelcaseKeys from 'camelcase-keys';
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import tokens from '@/services/tokens';
+import refreshToken from '@/utils/refreshToken';
 
 import { MimeType } from '@/typings/enum';
 
-const baseURL = 'http://api.web-artisan.ru/api';
+const baseURL = 'http://api.web-artisan.ru';
 
 const instance: AxiosInstance = axios.create({
   baseURL,
@@ -15,31 +16,16 @@ const instance: AxiosInstance = axios.create({
     'Content-Type': MimeType.APPLICATION_JSON,
   },
   secure: true,
+  isRequestRetry: false,
 });
 
 instance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     const { secure } = config;
-    if (secure) {
-      const isTokenValidForRefresh = Container.get(tokens.TOKEN_SERVICE).checkTokenValidForRefresh();
-      let accessToken = Container.get(tokens.TOKEN_SERVICE).getAccessToken();
-      console.log(isTokenValidForRefresh);
-      if (accessToken) {
-        // eslint-disable-next-line
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      }
-      if (isTokenValidForRefresh && !config.url?.includes('/logout') && !config.url?.includes('/refresh')) {
-        return Container.get(tokens.AUTH_SERVICE).refresh()
-          .then(() => {
-            // Update access token
-            accessToken = Container.get(tokens.TOKEN_SERVICE).getAccessToken();
-            if (accessToken) {
-              // eslint-disable-next-line
-              config.headers.Authorization = `Bearer ${accessToken}`;
-            }
-            return config;
-          });
-      }
+    const accessToken = Container.get(tokens.STORE).state.auth?.accessToken;
+    if (secure && accessToken) {
+      // eslint-disable-next-line
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
@@ -48,9 +34,22 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response: AxiosResponse) => camelcaseKeys(response.data, { deep: true }),
   (error) => {
+    const originalConfig = error.config;
     const status = error.response ? error.response.status : null;
-    if (status === 401 && !error.config.url.includes('/logout')) {
-      return Container.get(tokens.AUTH_SERVICE).logout().then(() => Promise.reject(error));
+    const store = Container.get(tokens.STORE);
+    const authService = Container.get(tokens.AUTH_SERVICE);
+    const isAuthorized = store.getters['user/isAuthorized'];
+    const token = Container.get(tokens.TOKEN_SERVICE).getRefreshToken();
+    if (status === 401) {
+      if (!originalConfig.isRequestRetry && !error.config.url.includes('/oauth/token') && typeof token === 'string') {
+        return refreshToken(token, store, authService, () => {
+          originalConfig.isRequestRetry = true;
+          return instance.request(originalConfig);
+        });
+      }
+      if (isAuthorized) {
+        return Container.get(tokens.AUTH_SERVICE).logout().then(() => Promise.reject(error));
+      }
     }
     return Promise.reject(error);
   },

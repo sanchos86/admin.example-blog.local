@@ -18,19 +18,19 @@ export interface CategoriesApiUnitFactory extends ApiUnitFactory {
 
 const categories: CategoriesApiUnitFactory = (httpService: HttpClient): CategoriesApiUnit => ({
   getCategories(): Promise<any> {
-    const url = 'categories';
+    const url = 'api/categories';
     return httpService.get(url);
   },
   addCategory(payload: Payload): Promise<any> {
-    const url = 'categories';
+    const url = 'api/categories';
     return httpService.post(url, payload);
   },
   editCategory(categoryId: number, payload: Payload): Promise<any> {
-    const url = `categories/${categoryId}`;
+    const url = `api/categories/${categoryId}`;
     return httpService.put(url, payload);
   },
   deleteCategory(categoryId: number): Promise<any> {
-    const url = `categories/${categoryId}`;
+    const url = `api/categories/${categoryId}`;
     return httpService.delete(url);
   },
 });

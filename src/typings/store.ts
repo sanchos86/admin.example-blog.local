@@ -9,6 +9,12 @@ export type AppStore = Store<RootState>
 
 export interface RootState {
   language: string;
+  alerts?: AlertsState;
+  categories?: CategoriesState;
+  tags?: TagsState;
+  user?: UserState;
+  progress?: ProgressState;
+  auth?: AuthState;
 }
 
 export interface AlertsState {
@@ -30,4 +36,10 @@ export interface UserState {
 export interface ProgressState {
   isActiveGlobalProgress: boolean;
   progress: Map<string, boolean | undefined>;
+}
+
+export interface AuthState {
+  accessToken: string | null;
+  isRefreshingToken: boolean;
+  refreshingTokenPromise: Promise<unknown> | null;
 }

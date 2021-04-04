@@ -1,6 +1,5 @@
 import { Service, Inject } from 'typedi';
 
-import { addExpiresInToCurrentDate } from '@/utils/utils';
 import tokens from '@/services/tokens';
 import BaseApiService from '@/services/BaseApiService';
 import TokenService from '@/services/TokenService';
@@ -23,29 +22,50 @@ export default class AuthService {
   @Inject(tokens.ROOT_SERVICE)
   private readonly rootService!: RootService;
 
+  private readonly clientId = 2;
+
+  private readonly clientSecret = 'zfjpd3dMiCOcy5Knm73LlAf6wNUQA02BOewX9WWb';
+
+  private readonly scope = '';
+
+  private preparePayload(params: { [key: string]: any }): FormData {
+    const payload = new FormData();
+
+    payload.append('client_id', String(this.clientId));
+    payload.append('client_secret', this.clientSecret);
+    payload.append('scope', this.scope);
+
+    Object.keys(params).forEach((key) => {
+      payload.append(key, params[key]);
+    });
+
+    return payload;
+  }
+
   async login(credentials: Payload): Promise<void> {
-    const { accessToken, expiresIn } = await this.baseApiService.auth.login(credentials);
-    const expirationDate = addExpiresInToCurrentDate(expiresIn);
-    this.tokenService.setAccessToken(accessToken);
-    this.tokenService.setExpirationDate(expirationDate);
+    const grantType = 'password';
+    const payload = this.preparePayload({
+      username: credentials.email,
+      password: credentials.password,
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      grant_type: grantType,
+    });
+    const { accessToken, refreshToken } = await this.baseApiService.auth.login(payload);
+    this.store.commit('auth/setAccessToken', accessToken);
+    this.tokenService.setRefreshToken(refreshToken);
   }
 
   async logout() {
-    try {
-      await this.baseApiService.auth.logout();
-      // eslint-disable-next-line no-empty
-    } catch (e) {
-    } finally {
-      await this.rootService.resetState();
-      this.tokenService.removeAccessToken();
-      this.tokenService.removeExpirationDate();
-    }
+    await this.rootService.resetState();
+    this.tokenService.removeRefreshToken();
   }
 
-  async refresh() {
-    const { accessToken, expiresIn } = await this.baseApiService.auth.refresh();
-    const expirationDate = addExpiresInToCurrentDate(expiresIn);
-    this.tokenService.setAccessToken(accessToken);
-    this.tokenService.setExpirationDate(expirationDate);
+  async refresh(token: string) {
+    const grantType = 'refresh_token';
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    const payload = this.preparePayload({ grant_type: grantType, refresh_token: token });
+    const { accessToken, refreshToken } = await this.baseApiService.auth.refresh(payload);
+    this.store.commit('auth/setAccessToken', accessToken);
+    this.tokenService.setRefreshToken(refreshToken);
   }
 }

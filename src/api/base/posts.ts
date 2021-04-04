@@ -21,27 +21,27 @@ export interface PostsApiUnitFactory extends ApiUnitFactory {
 
 const posts: PostsApiUnitFactory = (httpService: HttpClient): PostsApiUnit => ({
   getPosts(params: QueryParams): Promise<any> {
-    const url = 'posts';
+    const url = 'api/posts';
     return httpService.get(url, params);
   },
   getPost(slug: string): Promise<any> {
-    const url = `posts/${slug}`;
+    const url = `api/posts/${slug}`;
     return httpService.get(url);
   },
   addPost(payload: Payload): Promise<any> {
-    const url = 'posts';
+    const url = 'api/posts';
     return httpService.post(url, payload);
   },
   editPost(postId: number, payload: Payload): Promise<any> {
-    const url = `posts/${postId}`;
+    const url = `api/posts/${postId}`;
     return httpService.post(url, payload);
   },
   publishPost(postId: number, payload: Payload): Promise<any> {
-    const url = `posts/${postId}/publish`;
+    const url = `api/posts/${postId}/publish`;
     return httpService.patch(url, payload);
   },
   deletePost(postId: number): Promise<any> {
-    const url = `posts/${postId}`;
+    const url = `api/posts/${postId}`;
     return httpService.delete(url);
   },
 });

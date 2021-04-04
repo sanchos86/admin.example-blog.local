@@ -10,7 +10,7 @@ export interface UsersApiUnitFactory extends ApiUnitFactory {
 
 const users: UsersApiUnitFactory = (httpService: HttpClient): UsersApiUnit => ({
   getProfile(): Promise<any> {
-    const url = 'users/me';
+    const url = 'api/users/me';
     return httpService.get(url);
   },
 });

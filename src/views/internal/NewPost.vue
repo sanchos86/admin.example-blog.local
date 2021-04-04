@@ -214,8 +214,10 @@
     }
 
     async created() {
-      await Container.get(tokens.TAGS_SERVICE).getTags();
-      await Container.get(tokens.CATEGORIES_SERVICE).getCategories();
+      await Promise.all([
+        Container.get(tokens.TAGS_SERVICE).getTags(),
+        Container.get(tokens.CATEGORIES_SERVICE).getCategories(),
+      ]);
     }
   }
 </script>

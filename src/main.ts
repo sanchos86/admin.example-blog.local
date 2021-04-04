@@ -36,20 +36,13 @@ const init = async () => {
   const tokenService = Container.get(tokens.TOKEN_SERVICE);
   const authService = Container.get(tokens.AUTH_SERVICE);
   const userServices = Container.get(tokens.USERS_SERVICE);
-  const accessToken = tokenService.getAccessToken();
-  if (accessToken) {
-    const accessTokenValid = tokenService.checkAccessTokenValidity();
-    if (accessTokenValid) {
-      try {
-        await authService.refresh();
-        await userServices.getProfile();
-      } catch (e) {
-        tokenService.removeAccessToken();
-        tokenService.removeExpirationDate();
-      }
-    } else {
-      tokenService.removeAccessToken();
-      tokenService.removeExpirationDate();
+  const refreshToken = tokenService.getRefreshToken();
+  if (refreshToken) {
+    try {
+      await authService.refresh(refreshToken);
+      await userServices.getProfile();
+    } catch (e) {
+      tokenService.removeRefreshToken();
     }
   }
 };
