@@ -60,8 +60,8 @@
     };
 
     form: LoginForm = {
-      email: 'bergnaum.ozella@example.org',// 'admin@admin.ru',
-      password: 'password'// 'combat18',
+      email: '',
+      password: '',
     };
 
     validations() {

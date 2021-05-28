@@ -5,21 +5,28 @@
         <v-btn v-on="on" v-bind="attrs" color="red" class="white--text" small>Удалить</v-btn>
       </template>
       <v-card>
-        <v-card-title>Удалить запись</v-card-title>
-        <v-card-text>
+        <v-card-title class="px-4">Удалить запись</v-card-title>
+        <v-card-text class="px-4">
           <v-container class="pa-0">
             <v-row>
               <v-col class="py-0">
-                <span class="subtitle-2">
+                <span>
                   Вы действительно хотите удалить запись <strong>{{ post.title }}</strong>?
                 </span>
               </v-col>
             </v-row>
           </v-container>
         </v-card-text>
-        <v-card-actions class="px-6 pb-4">
+        <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="isDialogOpened = false" small>Отмена</v-btn>
+          <v-btn
+            color="red"
+            outlined
+            small
+            @click="isDialogOpened = false"
+          >
+            Отмена
+          </v-btn>
           <v-btn
             color="red"
             class="white--text"

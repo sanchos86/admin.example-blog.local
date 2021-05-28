@@ -27,7 +27,7 @@
                 />
               </v-col>
             </v-row>
-            <v-row>
+            <v-row align="end">
               <v-col cols="4">
                 <v-select
                   v-model="$v.form.category.$model"

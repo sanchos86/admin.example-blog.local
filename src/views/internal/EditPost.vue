@@ -27,7 +27,7 @@
                 />
               </v-col>
             </v-row>
-            <v-row>
+            <v-row align="end">
               <v-col cols="4">
                 <v-select
                   v-model="$v.form.category.$model"
@@ -50,7 +50,8 @@
                 <v-file-input
                   v-model="$v.form.picture.$model"
                   label="Картинка"
-                  :disabled="Boolean(form.src)"
+                  @change="renderPicture"
+                  @click:clear="removePicture"
                 />
               </v-col>
             </v-row>
@@ -87,19 +88,11 @@
         </form>
       </v-col>
       <v-col cols="4">
-        <v-img v-if="form.src" max-width="100%" :src="form.src">
-          <v-btn
-            class="edit-post__remove-picture-icon"
-            color="error"
-            depressed
-            x-small
-            dark
-            fab
-            @click="removePicture"
-          >
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-img>
+        <PicturePreview
+          v-if="form.src"
+          :src="form.src"
+          @remove-picture="removePicture"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -113,13 +106,16 @@
   import { minLength, required, requiredIf } from 'vuelidate/lib/validators';
   import hljs from 'highlight.js';
 
-  import tokens from '@/services/tokens';
-  import type { Loading } from '@/typings/misc';
-  import Post from '@/models/Post';
-  import ValidationMixin from '@/mixins/ValidationMixin';
   import Tag from '@/models/Tag';
+  import Post from '@/models/Post';
   import Category from '@/models/Category';
+  import tokens from '@/services/tokens';
+  import ValidationMixin from '@/mixins/ValidationMixin';
   import successCodes from '@/constants/successCodes';
+
+  import type { Loading } from '@/typings/misc';
+
+  import PicturePreview from '@/components/common/PicturePreview.vue';
 
   interface EditPostForm {
     id: number | undefined;
@@ -137,7 +133,11 @@
     useBR: false,
   });
 
-  @Component
+  @Component({
+    components: {
+      PicturePreview,
+    },
+  })
   export default class EditPost extends mixins(ValidationMixin) {
     @State('tags', { namespace: 'tags' }) tags!: Tag[];
 
@@ -217,6 +217,16 @@
       return this.$refs.editor?.quill;
     }
 
+    renderPicture(file: File) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.addEventListener('loadend', (e) => {
+        if (typeof e.target?.result === 'string') {
+          this.form.src = e.target.result;
+        }
+      });
+    }
+
     updateForm(post: Post) {
       this.form = {
         id: post.id,
@@ -270,13 +280,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .edit-post {
-    &__remove-picture-icon {
-      position: absolute;
-      top: map_get($gaps, 2);
-      right: map_get($gaps, 2);
-    }
-  }
-</style>
