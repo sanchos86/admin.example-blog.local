@@ -12,18 +12,18 @@
             type="text"
             :label="$t('auth.login.labels.email')"
             :error-messages="$getValidationMessage($v.form.email)"
-          ></v-text-field>
+          />
           <v-text-field
             v-model="$v.form.password.$model"
             prepend-icon="mdi-lock"
             type="password"
             :label="$t('auth.login.labels.password')"
             :error-messages="$getValidationMessage($v.form.password)"
-          ></v-text-field>
+          />
         </form>
       </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
+      <v-card-actions class="pa-4 pt-0">
+        <v-spacer />
         <v-btn
           type="submit"
           color="primary"
@@ -45,13 +45,10 @@
   import { required, email, minLength } from 'vuelidate/lib/validators';
 
   import tokens from '@/services/tokens';
-  import type { Loading } from '@/typings/misc';
   import ValidationMixin from '@/mixins/ValidationMixin';
 
-  interface LoginForm {
-    email: string;
-    password: string;
-  }
+  import type { Loading } from '@/typings/misc';
+  import type { LoginForm } from '@/typings/forms';
 
   @Component
   export default class Login extends mixins(ValidationMixin) {
@@ -79,7 +76,7 @@
       };
     }
 
-    get isFormInvalid(): boolean {
+    get isFormInvalid() {
       return this.$v.form.$invalid;
     }
 

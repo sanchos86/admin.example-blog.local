@@ -1,4 +1,13 @@
-import { Payload } from '@/typings/misc';
+import type { Payload } from '@/typings/misc';
+import type { NewCategoryForm } from '@/typings/forms';
+
+export interface CategoryEntity {
+  id: number;
+
+  name: string;
+
+  slug: string;
+}
 
 export default class Category {
   id: number;
@@ -7,21 +16,21 @@ export default class Category {
 
   slug: string;
 
-  constructor(data: any = {}) {
+  constructor(data: CategoryEntity) {
     this.id = data.id;
     this.name = data.name;
     this.slug = data.slug;
   }
 
-  get value(): number {
+  get value() {
     return this.id;
   }
 
-  get text(): string {
+  get text() {
     return this.name;
   }
 
-  static getPayloadToAddCategory(data: any = {}): Payload {
+  static getPayloadToAddCategory(data: NewCategoryForm): Payload {
     return {
       name: data.name,
       slug: data.slug,

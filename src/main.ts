@@ -23,6 +23,8 @@ import 'quill/dist/quill.snow.css';
 /* eslint-enable import/no-extraneous-dependencies */
 import 'highlight.js/styles/ocean.css';
 
+import type { AppConfig } from '@/typings/store';
+
 dayjs.locale('ru');
 dayjs.extend(localizedFormat);
 
@@ -31,6 +33,17 @@ Vue.use(VueQuillEditor);
 
 Vue.prototype.dayjs = dayjs;
 Vue.config.productionTip = false;
+
+const appConfigElement = document.getElementById('appConfig');
+let appConfig = {} as AppConfig;
+if (appConfigElement instanceof HTMLElement) {
+  try {
+    appConfig = JSON.parse(appConfigElement.innerHTML);
+  } catch (e) {
+  }
+  // eslint-disable-next-line no-unused-expressions
+  appConfigElement.parentNode?.removeChild(appConfigElement);
+}
 
 const init = async () => {
   const tokenService = Container.get(tokens.TOKEN_SERVICE);
@@ -49,6 +62,7 @@ const init = async () => {
 
 (async () => {
   try {
+    store.commit('setAppConfig', appConfig);
     await init();
   } finally {
     new Vue({

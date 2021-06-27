@@ -4,7 +4,7 @@ import User from '@/models/User';
 import tokens from '@/services/tokens';
 import BaseApiService from '@/services/BaseApiService';
 
-import { AppStore } from '@/typings/store';
+import type { AppStore } from '@/typings/store';
 
 @Service(tokens.USERS_SERVICE)
 export default class UsersService {
@@ -15,8 +15,8 @@ export default class UsersService {
   private readonly store!: AppStore;
 
   async getProfile(): Promise<User> {
-    let user = await this.baseApiService.users.getProfile();
-    user = new User(user);
+    const entity = await this.baseApiService.users.getProfile();
+    const user = new User(entity);
     this.store.commit('user/setUser', user);
     return user;
   }

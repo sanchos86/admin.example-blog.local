@@ -12,7 +12,7 @@ import PostsService from '@/services/PostsService';
 import RootService from '@/services/RootService';
 import ProgressService from '@/services/ProgressService';
 
-import { AppStore } from '@/typings/store';
+import type { AppStore } from '@/typings/store';
 
 export default {
   STORE: new Token<AppStore>(),

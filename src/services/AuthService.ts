@@ -5,8 +5,21 @@ import BaseApiService from '@/services/BaseApiService';
 import TokenService from '@/services/TokenService';
 import RootService from '@/services/RootService';
 
-import { Payload } from '@/typings/misc';
-import { AppStore } from '@/typings/store';
+import type { AppStore } from '@/typings/store';
+import type { LoginForm } from '@/typings/forms';
+
+interface LoginPayloadParams {
+  username: string;
+  password: string;
+  grant_type: string;
+}
+
+interface RefreshPayloadParams {
+  grant_type: string;
+  refresh_token: string;
+}
+
+type PayloadParams = LoginPayloadParams | RefreshPayloadParams;
 
 @Service(tokens.AUTH_SERVICE)
 export default class AuthService {
@@ -22,27 +35,23 @@ export default class AuthService {
   @Inject(tokens.ROOT_SERVICE)
   private readonly rootService!: RootService;
 
-  private readonly clientId = 2;
-
-  private readonly clientSecret = 'zfjpd3dMiCOcy5Knm73LlAf6wNUQA02BOewX9WWb';
-
   private readonly scope = '';
 
-  private preparePayload(params: { [key: string]: any }): FormData {
+  private preparePayload(params: PayloadParams): FormData {
     const payload = new FormData();
 
-    payload.append('client_id', String(this.clientId));
-    payload.append('client_secret', this.clientSecret);
+    payload.append('client_id', String(this.store.state.appConfig.clientId));
+    payload.append('client_secret', this.store.state.appConfig.clientSecret);
     payload.append('scope', this.scope);
 
     Object.keys(params).forEach((key) => {
-      payload.append(key, params[key]);
+      payload.append(key, params[key as keyof PayloadParams]);
     });
 
     return payload;
   }
 
-  async login(credentials: Payload): Promise<void> {
+  async login(credentials: LoginForm): Promise<void> {
     const grantType = 'password';
     const payload = this.preparePayload({
       username: credentials.email,
@@ -62,8 +71,12 @@ export default class AuthService {
 
   async refresh(token: string) {
     const grantType = 'refresh_token';
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    const payload = this.preparePayload({ grant_type: grantType, refresh_token: token });
+    /* eslint-disable @typescript-eslint/camelcase */
+    const payload = this.preparePayload({
+      grant_type: grantType,
+      refresh_token: token,
+    });
+    /* eslint-disable @typescript-eslint/camelcase */
     const { accessToken, refreshToken } = await this.baseApiService.auth.refresh(payload);
     this.store.commit('auth/setAccessToken', accessToken);
     this.tokenService.setRefreshToken(refreshToken);

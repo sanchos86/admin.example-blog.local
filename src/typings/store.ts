@@ -5,9 +5,15 @@ import Tag from '@/models/Tag';
 import Alert from '@/models/Alert';
 import User from '@/models/User';
 
-export type AppStore = Store<RootState>
+export type AppStore = Store<RootState>;
+
+export interface AppConfig {
+  clientId: number;
+  clientSecret: string;
+}
 
 export interface RootState {
+  appConfig: AppConfig;
   language: string;
   alerts?: AlertsState;
   categories?: CategoriesState;

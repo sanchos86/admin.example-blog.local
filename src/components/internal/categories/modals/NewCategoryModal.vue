@@ -73,10 +73,7 @@
   import tokens from '@/services/tokens';
   import successCodes from '@/constants/successCodes';
 
-  interface NewCategoryForm {
-    name: string;
-    slug: string;
-  }
+  import type { NewCategoryForm } from '@/typings/forms';
 
   @Component
   export default class NewCategoryModal extends mixins(ValidationMixin) {

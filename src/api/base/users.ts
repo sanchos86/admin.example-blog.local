@@ -1,7 +1,12 @@
-import { ApiUnit, ApiUnitFactory, HttpClient } from '@/typings/misc';
+import type {
+  ApiUnit,
+  ApiUnitFactory,
+  HttpClient,
+} from '@/typings/misc';
+import type { UserEntity } from '@/models/User';
 
 export interface UsersApiUnit extends ApiUnit {
-  getProfile(): Promise<any>;
+  getProfile(): Promise<UserEntity>;
 }
 
 export interface UsersApiUnitFactory extends ApiUnitFactory {
@@ -9,7 +14,7 @@ export interface UsersApiUnitFactory extends ApiUnitFactory {
 }
 
 const users: UsersApiUnitFactory = (httpService: HttpClient): UsersApiUnit => ({
-  getProfile(): Promise<any> {
+  getProfile() {
     const url = 'api/users/me';
     return httpService.get(url);
   },

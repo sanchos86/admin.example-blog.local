@@ -4,7 +4,8 @@ import Category from '@/models/Category';
 import tokens from '@/services/tokens';
 import BaseApiService from '@/services/BaseApiService';
 
-import { AppStore } from '@/typings/store';
+import type { AppStore } from '@/typings/store';
+import type { NewCategoryForm } from '@/typings/forms';
 
 @Service(tokens.CATEGORIES_SERVICE)
 export default class CategoriesService {
@@ -15,23 +16,24 @@ export default class CategoriesService {
   private readonly store!: AppStore;
 
   async getCategories(): Promise<Category[]> {
-    let categories = await this.baseApiService.categories.getCategories();
-    categories = categories.map((el: any) => new Category(el));
+    const entities = await this.baseApiService.categories.getCategories();
+    const categories = entities.map((el) => new Category(el));
     this.store.commit('categories/setCategories', categories);
     return categories;
   }
 
-  async addCategory(data: any): Promise<Category> {
+  async addCategory(data: NewCategoryForm): Promise<Category> {
     const payload = Category.getPayloadToAddCategory(data);
-    return this.baseApiService.categories.addCategory(payload);
+    const entity = await this.baseApiService.categories.addCategory(payload);
+    return new Category(entity);
   }
 
   async editCategory(categoryId: number, data: any): Promise<Category> {
     const payload = Category.getPayloadToEditCategory(data);
-    let editedCategory = await this.baseApiService.categories.editCategory(categoryId, payload);
-    editedCategory = new Category(editedCategory);
-    this.store.commit('categories/updateCategory', editedCategory);
-    return editedCategory;
+    const entity = await this.baseApiService.categories.editCategory(categoryId, payload);
+    const category = new Category(entity);
+    this.store.commit('categories/updateCategory', category);
+    return category;
   }
 
   async deleteCategory(categoryId: number): Promise<void> {

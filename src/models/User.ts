@@ -1,3 +1,13 @@
+export interface UserEntity {
+  id: number;
+
+  name: string;
+
+  email: string;
+
+  role: string;
+}
+
 export default class User {
   id: number;
 
@@ -7,7 +17,7 @@ export default class User {
 
   role: string
 
-  constructor(data: any = {}) {
+  constructor(data: UserEntity) {
     this.id = data.id;
     this.name = data.name;
     this.email = data.email;

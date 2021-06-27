@@ -1,5 +1,13 @@
 import { Payload } from '@/typings/misc';
 
+export interface TagEntity {
+  id: number;
+
+  name: string;
+
+  slug: string;
+}
+
 export default class Tag {
   id: number;
 
@@ -7,17 +15,17 @@ export default class Tag {
 
   slug: string;
 
-  constructor(data: any = {}) {
+  constructor(data: TagEntity) {
     this.id = data.id;
     this.name = data.name;
     this.slug = data.slug;
   }
 
-  get value(): number {
+  get value() {
     return this.id;
   }
 
-  get text(): string {
+  get text() {
     return this.name;
   }
 

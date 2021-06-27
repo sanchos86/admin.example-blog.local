@@ -1,16 +1,16 @@
 import deepmerge from 'deepmerge';
 import { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-import * as misc from '@/typings/misc';
+import type { HttpClient, QueryParams } from '@/typings/misc';
 
-export default class AxiosService implements misc.HttpClient {
+export default class AxiosService implements HttpClient {
   private readonly axiosInstance: AxiosInstance;
 
   constructor(axiosInstance: AxiosInstance) {
     this.axiosInstance = axiosInstance;
   }
 
-  get(url: string, params: misc.QueryParams = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
+  get(url: string, params: QueryParams = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
     const defaultConfig: Partial<AxiosRequestConfig> = { params };
     const config = deepmerge(defaultConfig, extraConfig);
     return this.axiosInstance.get(url, config);
@@ -35,7 +35,7 @@ export default class AxiosService implements misc.HttpClient {
   }
 
   // eslint-disable-next-line max-len
-  delete(url: string, params: misc.QueryParams = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
+  delete(url: string, params: QueryParams = {}, extraConfig: Partial<AxiosRequestConfig> = {}) {
     const defaultConfig: Partial<AxiosRequestConfig> = { params };
     const config = deepmerge(defaultConfig, extraConfig);
     return this.axiosInstance.delete(url, config);

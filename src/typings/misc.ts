@@ -22,12 +22,12 @@ export interface QueryParams {
 }
 
 export interface Payload {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface HttpClient {
   get(url: string, params?: QueryParams, extraConfig?: Partial<AxiosRequestConfig>): Promise<any>;
-  post(url: string, payload?: Payload, extraConfig?: Partial<AxiosRequestConfig>): Promise<any>;
+  post(url: string, payload?: Payload | FormData, extraConfig?: Partial<AxiosRequestConfig>): Promise<any>;
   put(url: string, payload?: Payload, extraConfig?: Partial<AxiosRequestConfig>): Promise<any>;
   patch(url: string, payload?: Payload, extraConfig?: Partial<AxiosRequestConfig>): Promise<any>;
   delete(url: string, params?: QueryParams, extraConfig?: Partial<AxiosRequestConfig>): Promise<any>;

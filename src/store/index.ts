@@ -8,7 +8,7 @@ import categories from '@/store/modules/categories';
 import progress from '@/store/modules/progress';
 import auth from '@/store/modules/auth';
 
-import { RootState, AppStore } from '@/typings/store';
+import { RootState, AppStore, AppConfig } from '@/typings/store';
 
 Vue.use(Vuex);
 
@@ -26,8 +26,12 @@ const actions: ActionTree<RootState, RootState> = {
 const storeOptions: StoreOptions<RootState> = {
   state: {
     language: 'ru',
+    appConfig: {} as AppConfig,
   },
   mutations: {
+    setAppConfig(state, appConfig: AppConfig) {
+      state.appConfig = appConfig;
+    },
   },
   actions,
   modules: {

@@ -7,17 +7,9 @@
       <v-card>
         <v-card-title class="px-4">Удалить запись</v-card-title>
         <v-card-text class="px-4">
-          <v-container class="pa-0">
-            <v-row>
-              <v-col class="py-0">
-                <span>
-                  Вы действительно хотите удалить запись <strong>{{ post.title }}</strong>?
-                </span>
-              </v-col>
-            </v-row>
-          </v-container>
+          Вы действительно хотите удалить запись <strong>{{ post.title }}</strong>?
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="pa-4 pt-0">
           <v-spacer></v-spacer>
           <v-btn
             color="red"

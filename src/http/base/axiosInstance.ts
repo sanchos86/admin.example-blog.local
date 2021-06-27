@@ -4,13 +4,10 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import tokens from '@/services/tokens';
 import refreshToken from '@/utils/refreshToken';
-
 import { MimeType } from '@/typings/enum';
 
-const baseURL = 'http://api.web-artisan.ru';
-
 const instance: AxiosInstance = axios.create({
-  baseURL,
+  baseURL: process.env.VUE_APP_AXIOS_BASE_URL,
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': MimeType.APPLICATION_JSON,

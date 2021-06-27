@@ -1,3 +1,5 @@
+const appConfig = require('./config/config');
+
 module.exports = {
   lintOnSave: false,
 
@@ -15,6 +17,11 @@ module.exports = {
 
   devServer: {
     progress: false,
+    proxy: {
+      '/api': {
+        target: 'http://localhost',
+      },
+    },
   },
 
   chainWebpack(config) {
@@ -23,6 +30,7 @@ module.exports = {
       .tap((args) => {
         // eslint-disable-next-line no-param-reassign
         args[0].title = 'Панель администратора';
+        args[0].appConfig = JSON.stringify(appConfig);
         return args;
       });
   },
