@@ -20,6 +20,7 @@ pages:
   only:
     - web
   script:
+    - ls -la
     - mv dist public
   artifacts:
     paths:
