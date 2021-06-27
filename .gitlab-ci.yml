@@ -9,6 +9,7 @@ build:
   only:
     - web
   script:
+    - npm ci
     - npm run build
   artifacts:
     paths:
