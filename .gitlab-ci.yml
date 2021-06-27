@@ -21,4 +21,7 @@ pages:
     - web
   script:
     - mv dist public
+  artifacts:
+    paths:
+      - public
 
