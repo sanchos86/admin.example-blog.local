@@ -41,7 +41,7 @@ export default class Post {
     return this.tags.map((el) => el.id);
   }
 
-  static getPayload(data: any = {}): Payload {
+  static getPayload(data: any = {}) {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('text', data.text);
@@ -57,13 +57,13 @@ export default class Post {
     return formData;
   }
 
-  static getPayloadToAddPost(data: any = {}): Payload {
+  static getPayloadToAddPost(data: any = {}) {
     const formData = this.getPayload(data);
     formData.append('picture', data.picture);
     return formData;
   }
 
-  static getPayloadToEditPost(data: any = {}): Payload {
+  static getPayloadToEditPost(data: any = {}) {
     const formData = this.getPayload(data);
 
     formData.append('_method', 'PUT');

@@ -5,7 +5,7 @@ import tokens from '@/services/tokens';
 import BaseApiService from '@/services/BaseApiService';
 import AlertService from '@/services/AlertService';
 
-import { AppStore } from '@/typings/store';
+import type { AppStore } from '@/typings/store';
 
 @Service(tokens.TAGS_SERVICE)
 export default class TagsService {
@@ -19,25 +19,24 @@ export default class TagsService {
   private readonly alertsService!: AlertService;
 
   async getTags(): Promise<Tag[]> {
-    let tags = await this.baseApiService.tags.getTags();
-    tags = tags.map((el: any) => new Tag(el));
+    const entities = await this.baseApiService.tags.getTags();
+    const tags = entities.map((el) => new Tag(el));
     this.store.commit('tags/setTags', tags);
     return tags;
   }
 
   async addTag(data: any): Promise<Tag> {
     const payload = Tag.getPayloadToAddTag(data);
-    let newTag = await this.baseApiService.tags.addTag(payload);
-    newTag = new Tag(newTag);
-    return newTag;
+    const entity = await this.baseApiService.tags.addTag(payload);
+    return new Tag(entity);
   }
 
   async editTag(tagId: number, data: any): Promise<Tag> {
     const payload = Tag.getPayloadToEditTag(data);
-    let editedTag = await this.baseApiService.tags.editTag(tagId, payload);
-    editedTag = new Tag(editedTag);
-    this.store.commit('tags/updateTag', editedTag);
-    return editedTag;
+    const entity = await this.baseApiService.tags.editTag(tagId, payload);
+    const tag = new Tag(entity);
+    this.store.commit('tags/updateTag', tag);
+    return tag;
   }
 
   async deleteTag(tagId: number): Promise<void> {
