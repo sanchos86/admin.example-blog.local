@@ -9,8 +9,8 @@ import {
 export interface PostsApiUnit extends ApiUnit {
   getPosts(params: QueryParams): Promise<any>;
   getPost(slug: string): Promise<any>;
-  addPost(payload: Payload): Promise<any>;
-  editPost(postId: number, payload: Payload): Promise<any>;
+  addPost(payload: FormData): Promise<any>;
+  editPost(postId: number, payload: FormData): Promise<any>;
   publishPost(postId: number, payload: Payload): Promise<any>;
   deletePost(postId: number): Promise<any>;
 }
@@ -28,11 +28,11 @@ const posts: PostsApiUnitFactory = (httpService: HttpClient): PostsApiUnit => ({
     const url = `api/posts/${slug}`;
     return httpService.get(url);
   },
-  addPost(payload: Payload): Promise<any> {
+  addPost(payload: FormData): Promise<any> {
     const url = 'api/posts';
     return httpService.post(url, payload);
   },
-  editPost(postId: number, payload: Payload): Promise<any> {
+  editPost(postId: number, payload: FormData): Promise<any> {
     const url = `api/posts/${postId}`;
     return httpService.post(url, payload);
   },
