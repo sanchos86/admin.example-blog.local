@@ -1,0 +1,23 @@
+image: node:14
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  only:
+    - web
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - .
+
+pages:
+  stage: deploy
+  only:
+    - web
+  script:
+    - mv dist public
+
