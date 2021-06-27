@@ -19,9 +19,12 @@ pages:
   stage: deploy
   only:
     - web
+  variables:
+    GIT_STRATEGY: none
   script:
     - ls -la
-    - mv dist public
+    - mkdir public
+    - cp -r dist/* public
   artifacts:
     paths:
       - public
