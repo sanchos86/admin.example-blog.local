@@ -22,9 +22,7 @@ pages:
   variables:
     GIT_STRATEGY: none
   script:
-    - ls -la
-    - mkdir public
-    - cp -r dist/* public
+    - mv dist public
   artifacts:
     paths:
       - public

@@ -2,7 +2,7 @@ import { Module, MutationTree } from 'vuex';
 
 import Alert from '@/models/Alert';
 
-import { RootState, AlertsState } from '@/typings/store';
+import type { RootState, AlertsState } from '@/typings/store';
 
 const namespaced = true;
 
@@ -16,7 +16,7 @@ const mutations: MutationTree<AlertsState> = {
   },
   addAlert(state, alert: Alert) {
     state.alerts = state.alerts.filter(
-      (el) => JSON.stringify(el.data) !== JSON.stringify(alert.data)
+      (el) => JSON.stringify(el.data) !== JSON.stringify(alert.data),
     );
     state.alerts.push(alert);
   },
