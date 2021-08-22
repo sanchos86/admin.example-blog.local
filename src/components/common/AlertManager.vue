@@ -8,10 +8,10 @@
       dismissible
       @input="removeAlert(alert)"
     >
-      {{ alert.data.text }}
-      <template v-if="hasDetails(alert.data.details)">
+      {{ alert.title }}
+      <template v-if="hasDetails(alert.details)">
         <br />
-        <span class="alert-manager__details">{{ alert.data.details }}</span>
+        <span class="alert-manager__details">{{ alert.details }}</span>
       </template>
     </v-alert>
   </div>

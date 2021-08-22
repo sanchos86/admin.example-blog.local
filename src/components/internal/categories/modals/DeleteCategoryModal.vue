@@ -50,7 +50,11 @@
   import Category from '@/models/Category';
   import tokens from '@/services/tokens';
   import successCodes from '@/constants/successCodes';
+
   import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'deleteCategory';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component
   export default class DeleteCategoryModal extends Vue {
@@ -58,7 +62,7 @@
 
     isDialogOpened = false;
 
-    loading: Loading = {
+    loading: CustomLoading = {
       deleteCategory: false,
     };
 

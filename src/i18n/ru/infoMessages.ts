@@ -1,3 +1,3 @@
 export default {
-  UNKNOWN: 'Информация'
+  UNKNOWN: 'Информация',
 };

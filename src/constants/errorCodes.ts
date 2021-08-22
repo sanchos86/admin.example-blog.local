@@ -1,3 +1,3 @@
 export default {
-  UNKNOWN: 'UNKNOWN'
+  UNKNOWN: 'UNKNOWN',
 };

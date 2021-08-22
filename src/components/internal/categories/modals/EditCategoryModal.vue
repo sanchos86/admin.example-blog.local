@@ -59,14 +59,14 @@
 
   import tokens from '@/services/tokens';
   import successCodes from '@/constants/successCodes';
-  import type { Loading } from '@/typings/misc';
   import ValidationMixin from '@/mixins/ValidationMixin';
   import Category from '@/models/Category';
 
-  interface EditCategoryForm {
-    name: string;
-    slug: string;
-  }
+  import type { EditCategoryForm } from '@/typings/forms';
+  import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'editCategory';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component
   export default class EditCategoryModal extends mixins(ValidationMixin) {
@@ -77,7 +77,7 @@
       slug: '',
     };
 
-    loading: Loading = {
+    loading: CustomLoading = {
       editCategory: false,
     };
 

@@ -82,9 +82,13 @@
 
   import menuItems from '@/constants/menuItems';
   import tokens from '@/services/tokens';
-  import type { Loading } from '@/typings/misc';
 
   import AlertManager from '@/components/common/AlertManager.vue';
+
+  import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'logout';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component({
     components: {
@@ -98,7 +102,7 @@
 
     menuItems: Record<string, any>[] = menuItems;
 
-    loading: Loading = {
+    loading: CustomLoading = {
       logout: false,
     };
 

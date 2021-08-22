@@ -69,11 +69,14 @@
   import { mixins } from 'vue-class-component';
 
   import ValidationMixin from '@/mixins/ValidationMixin';
-  import type { Loading } from '@/typings/misc';
   import tokens from '@/services/tokens';
   import successCodes from '@/constants/successCodes';
 
   import type { NewCategoryForm } from '@/typings/forms';
+  import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'addCategory';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component
   export default class NewCategoryModal extends mixins(ValidationMixin) {
@@ -82,7 +85,7 @@
       slug: '',
     };
 
-    loading: Loading = {
+    loading: CustomLoading = {
       addCategory: false,
     };
 

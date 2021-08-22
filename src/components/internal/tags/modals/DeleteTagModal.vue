@@ -40,7 +40,11 @@
   import Tag from '@/models/Tag';
   import tokens from '@/services/tokens';
   import successCodes from '@/constants/successCodes';
+
   import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'deleteTag';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component
   export default class DeleteTagModal extends Vue {
@@ -48,7 +52,7 @@
 
     isDialogOpened = false;
 
-    loading: Loading = {
+    loading: CustomLoading = {
       deleteTag: false,
     };
 

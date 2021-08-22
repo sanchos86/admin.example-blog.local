@@ -40,14 +40,18 @@
 
   import tokens from '@/services/tokens';
   import successCodes from '@/constants/successCodes';
-  import type { Loading } from '@/typings/misc';
   import Post from '@/models/Post';
+
+  import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'deletePost';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component
   export default class DeletePostModal extends Vue {
     @Prop({ type: Object, required: true }) readonly post!: Post;
 
-    loading: Loading = {
+    loading: CustomLoading = {
       deletePost: false,
     };
 

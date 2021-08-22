@@ -1,17 +1,16 @@
 import { Token } from 'typedi';
 
-import BaseApiService from '@/services/BaseApiService';
-import AlertService from '@/services/AlertService';
-import AuthService from '@/services/AuthService';
-import TagsService from '@/services/TagsService';
-import TokenService from '@/services/TokenService';
-import CategoriesService from '@/services/CategoriesService';
-import UsersService from '@/services/UsersService';
-import TranslationService from '@/services/TranslationService';
-import PostsService from '@/services/PostsService';
-import RootService from '@/services/RootService';
-import ProgressService from '@/services/ProgressService';
-
+import type BaseApiService from '@/services/BaseApiService';
+import type AlertService from '@/services/AlertService';
+import type AuthService from '@/services/AuthService';
+import type TagsService from '@/services/TagsService';
+import type TokenService from '@/services/TokenService';
+import type CategoriesService from '@/services/CategoriesService';
+import type UsersService from '@/services/UsersService';
+import type TranslationService from '@/services/TranslationService';
+import type PostsService from '@/services/PostsService';
+import type RootService from '@/services/RootService';
+import type ProgressService from '@/services/ProgressService';
 import type { AppStore } from '@/typings/store';
 
 export default {

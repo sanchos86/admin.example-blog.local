@@ -16,7 +16,7 @@ const mutations: MutationTree<AlertsState> = {
   },
   addAlert(state, alert: Alert) {
     state.alerts = state.alerts.filter(
-      (el) => JSON.stringify(el.data) !== JSON.stringify(alert.data),
+      (el) => JSON.stringify(el) !== JSON.stringify(alert),
     );
     state.alerts.push(alert);
   },

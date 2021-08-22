@@ -15,5 +15,5 @@
       const name = newValue ? 'home' : 'login';
       this.$router.push({ name });
     }
-  };
+  }
 </script>

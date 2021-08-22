@@ -1,5 +1,5 @@
 import type { Payload } from '@/typings/misc';
-import type { NewCategoryForm } from '@/typings/forms';
+import type { NewCategoryForm, EditCategoryForm } from '@/typings/forms';
 
 export interface CategoryEntity {
   id: number;
@@ -37,7 +37,7 @@ export default class Category {
     };
   }
 
-  static getPayloadToEditCategory(data: any = {}): Payload {
+  static getPayloadToEditCategory(data: EditCategoryForm): Payload {
     return {
       name: data.name,
       slug: data.slug,

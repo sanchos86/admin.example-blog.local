@@ -33,6 +33,6 @@ export interface HttpClient {
   delete(url: string, params?: QueryParams, extraConfig?: Partial<AxiosRequestConfig>): Promise<any>;
 }
 
-export type Loading = {
-  [key: string]: boolean;
-};
+export type Loading<T extends string> = Record<T, boolean>;
+
+export type Nullable<T> = T | null;

@@ -1,10 +1,10 @@
 export default {
   enter: 'Войти',
   controls: {
-    enter: 'Войти'
+    enter: 'Войти',
   },
   labels: {
     email: 'Электронная почта',
-    password: 'Пароль'
-  }
+    password: 'Пароль',
+  },
 };

@@ -45,11 +45,15 @@
   import { Location } from 'vue-router';
   import { Container } from 'typedi';
 
-  import type { Loading } from '@/typings/misc';
   import Post from '@/models/Post';
   import tokens from '@/services/tokens';
 
   import PostsTable from '@/components/internal/posts/PostsTable.vue';
+
+  import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'getPosts';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component({
     components: {
@@ -61,7 +65,7 @@
 
     posts: Post[] = [];
 
-    loading: Loading = {
+    loading: CustomLoading = {
       getPosts: true,
     };
 

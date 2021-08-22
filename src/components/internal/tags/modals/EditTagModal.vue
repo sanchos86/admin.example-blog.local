@@ -68,12 +68,12 @@
   import tokens from '@/services/tokens';
   import successCodes from '@/constants/successCodes';
   import ValidationMixin from '@/mixins/ValidationMixin';
-  import type { Loading } from '@/typings/misc';
 
-  interface EditTagForm {
-    name: string;
-    slug: string;
-  }
+  import type { Loading } from '@/typings/misc';
+  import type { EditTagForm } from '@/typings/forms';
+
+  type LoadingKeys = 'editTag';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component
   export default class EditTagModal extends mixins(ValidationMixin) {
@@ -86,7 +86,7 @@
       slug: '',
     };
 
-    loading: Loading = {
+    loading: CustomLoading = {
       editTag: false,
     };
 

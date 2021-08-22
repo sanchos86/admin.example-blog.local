@@ -5,7 +5,7 @@ import tokens from '@/services/tokens';
 import BaseApiService from '@/services/BaseApiService';
 
 import type { AppStore } from '@/typings/store';
-import type { NewCategoryForm } from '@/typings/forms';
+import type { NewCategoryForm, EditCategoryForm } from '@/typings/forms';
 
 @Service(tokens.CATEGORIES_SERVICE)
 export default class CategoriesService {
@@ -28,7 +28,7 @@ export default class CategoriesService {
     return new Category(entity);
   }
 
-  async editCategory(categoryId: number, data: any): Promise<Category> {
+  async editCategory(categoryId: number, data: EditCategoryForm): Promise<Category> {
     const payload = Category.getPayloadToEditCategory(data);
     const entity = await this.baseApiService.categories.editCategory(categoryId, payload);
     const category = new Category(entity);

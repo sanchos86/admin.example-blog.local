@@ -50,9 +50,12 @@
   import type { Loading } from '@/typings/misc';
   import type { LoginForm } from '@/typings/forms';
 
+  type LoadingKeys = 'login';
+  type CustomLoading = Loading<LoadingKeys>;
+
   @Component
   export default class Login extends mixins(ValidationMixin) {
-    loading: Loading = {
+    loading: CustomLoading = {
       login: false,
     };
 

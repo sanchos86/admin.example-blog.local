@@ -4,7 +4,8 @@ import Post from '@/models/Post';
 import tokens from '@/services/tokens';
 import BaseApiService from '@/services/BaseApiService';
 
-import { QueryParams } from '@/typings/misc';
+import type { QueryParams } from '@/typings/misc';
+import type { NewPostForm, EditPostForm } from '@/typings/forms';
 
 @Service(tokens.POSTS_SERVICE)
 export default class PostsService {
@@ -22,13 +23,13 @@ export default class PostsService {
     return new Post(post);
   }
 
-  async addPost(data: any): Promise<Post> {
+  async addPost(data: NewPostForm): Promise<Post> {
     const payload = Post.getPayloadToAddPost(data);
     const post = await this.baseApiService.posts.addPost(payload);
     return new Post(post);
   }
 
-  async editPost(postId: number, data: any): Promise<Post> {
+  async editPost(postId: number, data: EditPostForm): Promise<Post> {
     const payload = Post.getPayloadToEditPost(data);
     const editedPost = await this.baseApiService.posts.editPost(postId, payload);
     return new Post(editedPost);

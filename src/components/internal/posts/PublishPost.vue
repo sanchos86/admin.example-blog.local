@@ -16,15 +16,19 @@
   import { Component, Vue, Prop } from 'vue-property-decorator';
 
   import tokens from '@/services/tokens';
-  import type { Loading } from '@/typings/misc';
   import Post from '@/models/Post';
   import successCodes from '@/constants/successCodes';
+
+  import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'publishPost';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component
   export default class PublishPost extends Vue {
     @Prop({ type: Object, required: true }) readonly post!: Post;
 
-    loading: Loading = {
+    loading: CustomLoading = {
       publishPost: false,
     };
 

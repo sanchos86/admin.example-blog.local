@@ -6,6 +6,7 @@ import BaseApiService from '@/services/BaseApiService';
 import AlertService from '@/services/AlertService';
 
 import type { AppStore } from '@/typings/store';
+import type { NewTagForm, EditTagForm } from '@/typings/forms';
 
 @Service(tokens.TAGS_SERVICE)
 export default class TagsService {
@@ -25,13 +26,13 @@ export default class TagsService {
     return tags;
   }
 
-  async addTag(data: any): Promise<Tag> {
+  async addTag(data: NewTagForm): Promise<Tag> {
     const payload = Tag.getPayloadToAddTag(data);
     const entity = await this.baseApiService.tags.addTag(payload);
     return new Tag(entity);
   }
 
-  async editTag(tagId: number, data: any): Promise<Tag> {
+  async editTag(tagId: number, data: EditTagForm): Promise<Tag> {
     const payload = Tag.getPayloadToEditTag(data);
     const entity = await this.baseApiService.tags.editTag(tagId, payload);
     const tag = new Tag(entity);

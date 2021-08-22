@@ -98,22 +98,17 @@
   import { mixins } from 'vue-class-component';
   import hljs from 'highlight.js';
 
-  import type { Loading } from '@/typings/misc';
   import Tag from '@/models/Tag';
   import Category from '@/models/Category';
   import tokens from '@/services/tokens';
   import ValidationMixin from '@/mixins/ValidationMixin';
   import successCodes from '@/constants/successCodes';
 
-  interface NewPostForm {
-    title: string | undefined;
-    text: string | undefined;
-    slug: string | undefined;
-    publish: boolean;
-    category: number | undefined;
-    tags: number[];
-    picture: File | undefined;
-  }
+  import type { Loading } from '@/typings/misc';
+  import type { NewPostForm } from '@/typings/forms';
+
+  type LoadingKeys = 'addPost';
+  type CustomLoading = Loading<LoadingKeys>;
 
   hljs.configure({
     useBR: false,
@@ -125,7 +120,7 @@
 
     @State('categories', { namespace: 'categories' }) categories!: Category[];
 
-    loading: Loading = {
+    loading: CustomLoading = {
       addPost: false,
     };
 
@@ -142,19 +137,20 @@
           [{ indent: '-1' }, { indent: '+1' }],
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
           [{ align: [false, 'center', 'right', 'justify'] }],
-          ['link'],
+          [{ color: [] }, { background: [] }],
+          ['link', 'image'],
         ],
       },
     };
 
     form: NewPostForm = {
-      title: undefined,
-      text: undefined,
-      slug: undefined,
+      title: null,
+      text: null,
+      slug: null,
       publish: false,
-      category: undefined,
+      category: null,
       tags: [],
-      picture: undefined,
+      picture: null,
     };
 
     validations() {

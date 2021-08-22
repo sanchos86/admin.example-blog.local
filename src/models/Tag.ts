@@ -1,4 +1,5 @@
-import { Payload } from '@/typings/misc';
+import type { Payload } from '@/typings/misc';
+import type { NewTagForm, EditTagForm } from '@/typings/forms';
 
 export interface TagEntity {
   id: number;
@@ -29,14 +30,14 @@ export default class Tag {
     return this.name;
   }
 
-  static getPayloadToAddTag(data: any = {}): Payload {
+  static getPayloadToAddTag(data: NewTagForm): Payload {
     return {
       name: data.name,
       slug: data.slug,
     };
   }
 
-  static getPayloadToEditTag(data: any = {}): Payload {
+  static getPayloadToEditTag(data: EditTagForm): Payload {
     return {
       name: data.name,
       slug: data.slug,

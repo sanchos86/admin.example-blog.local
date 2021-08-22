@@ -26,10 +26,14 @@
 
   import Tag from '@/models/Tag';
   import tokens from '@/services/tokens';
-  import type { Loading } from '@/typings/misc';
 
   import TagsTable from '@/components/internal/tags/TagsTable.vue';
   import NewTagModal from '@/components/internal/tags/modals/NewTagModal.vue';
+
+  import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'getTags';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component({
     components: {
@@ -38,7 +42,7 @@
     },
   })
   export default class Tags extends Vue {
-    loading: Loading = {
+    loading: CustomLoading = {
       getTags: true,
     };
 

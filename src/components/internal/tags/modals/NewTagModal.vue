@@ -70,23 +70,23 @@
 
   import tokens from '@/services/tokens';
   import ValidationMixin from '@/mixins/ValidationMixin';
-  import type { Loading } from '@/typings/misc';
   import successCodes from '@/constants/successCodes';
 
-  interface TagForm {
-    name: string;
-    slug: string;
-  }
+  import type { Loading } from '@/typings/misc';
+  import type { NewTagForm } from '@/typings/forms';
+
+  type LoadingKeys = 'addTag';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component
   export default class NewTagModal extends mixins(ValidationMixin) {
     isDialogOpened = false;
 
-    loading: Loading = {
+    loading: CustomLoading = {
       addTag: false,
     };
 
-    form: TagForm = {
+    form: NewTagForm = {
       name: '',
       slug: '',
     };

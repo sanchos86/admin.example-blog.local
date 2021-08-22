@@ -113,21 +113,13 @@
   import ValidationMixin from '@/mixins/ValidationMixin';
   import successCodes from '@/constants/successCodes';
 
-  import type { Loading } from '@/typings/misc';
-
   import PicturePreview from '@/components/common/PicturePreview.vue';
 
-  interface EditPostForm {
-    id: number | undefined;
-    title: string | undefined;
-    text: string | undefined;
-    slug: string | undefined;
-    publish: boolean;
-    category: number | undefined;
-    tags: number[];
-    picture: File | undefined;
-    src: string | undefined;
-  }
+  import type { Loading } from '@/typings/misc';
+  import type { EditPostForm } from '@/typings/forms';
+
+  type LoadingKeys = 'editPost';
+  type CustomLoading = Loading<LoadingKeys>;
 
   hljs.configure({
     useBR: false,
@@ -143,7 +135,7 @@
 
     @State('categories', { namespace: 'categories' }) categories!: Category[];
 
-    loading: Loading = {
+    loading: CustomLoading = {
       editPost: false,
     };
 
@@ -160,21 +152,22 @@
           [{ indent: '-1' }, { indent: '+1' }],
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
           [{ align: [false, 'center', 'right', 'justify'] }],
-          ['link'],
+          [{ color: [] }, { background: [] }],
+          ['link', 'image'],
         ],
       },
     };
 
     form: EditPostForm = {
-      id: undefined,
-      title: undefined,
-      text: undefined,
-      slug: undefined,
+      id: null,
+      title: null,
+      text: null,
+      slug: null,
       publish: false,
-      category: undefined,
+      category: null,
       tags: [],
-      picture: undefined,
-      src: undefined,
+      picture: null,
+      src: null,
     };
 
     validations() {
@@ -236,13 +229,13 @@
         publish: Boolean(post.publishedAt),
         category: post.category.id,
         tags: post.tagsIds,
-        picture: undefined,
+        picture: null,
         src: post.src,
       };
     }
 
     removePicture() {
-      this.form.src = undefined;
+      this.form.src = null;
     }
 
     async editPost() {

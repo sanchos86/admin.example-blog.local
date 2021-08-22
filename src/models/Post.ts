@@ -1,6 +1,7 @@
-import { Payload } from '@/typings/misc';
 import Tag from '@/models/Tag';
 import Category from '@/models/Category';
+
+import type { NewPostForm, EditPostForm } from '@/typings/forms';
 
 export default class Post {
   id: number;
@@ -41,11 +42,11 @@ export default class Post {
     return this.tags.map((el) => el.id);
   }
 
-  static getPayload(data: any = {}) {
+  static getPayload(data: (NewPostForm | EditPostForm) & { plainText: string }) {
     const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('text', data.text);
-    formData.append('slug', data.slug);
+    formData.append('title', data.title as string);
+    formData.append('text', data.text as string);
+    formData.append('slug', data.slug as string);
     formData.append('publish', String(Number(data.publish)));
     formData.append('category_id', String(data.category));
     formData.append('plain_text', data.plainText);
@@ -57,13 +58,13 @@ export default class Post {
     return formData;
   }
 
-  static getPayloadToAddPost(data: any = {}) {
+  static getPayloadToAddPost(data: NewPostForm & { plainText: string }) {
     const formData = this.getPayload(data);
-    formData.append('picture', data.picture);
+    formData.append('picture', data.picture as File);
     return formData;
   }
 
-  static getPayloadToEditPost(data: any = {}) {
+  static getPayloadToEditPost(data: EditPostForm & { plainText: string }) {
     const formData = this.getPayload(data);
 
     formData.append('_method', 'PUT');

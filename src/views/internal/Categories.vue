@@ -26,10 +26,14 @@
 
   import Category from '@/models/Category';
   import tokens from '@/services/tokens';
-  import type { Loading } from '@/typings/misc';
 
   import CategoriesTable from '@/components/internal/categories/CategoriesTable.vue';
   import NewCategoryModal from '@/components/internal/categories/modals/NewCategoryModal.vue';
+
+  import type { Loading } from '@/typings/misc';
+
+  type LoadingKeys = 'getCategories';
+  type CustomLoading = Loading<LoadingKeys>;
 
   @Component({
     components: {
@@ -38,7 +42,7 @@
     },
   })
   export default class Categories extends Vue {
-    loading: Loading = {
+    loading: CustomLoading = {
       getCategories: true,
     };
 
