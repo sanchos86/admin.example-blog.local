@@ -23,13 +23,13 @@ export default class PostsService {
     return new Post(post);
   }
 
-  async addPost(data: NewPostForm): Promise<Post> {
+  async addPost(data: NewPostForm & { plainText: string }): Promise<Post> {
     const payload = Post.getPayloadToAddPost(data);
     const post = await this.baseApiService.posts.addPost(payload);
     return new Post(post);
   }
 
-  async editPost(postId: number, data: EditPostForm): Promise<Post> {
+  async editPost(postId: number, data: EditPostForm & { plainText: string }): Promise<Post> {
     const payload = Post.getPayloadToEditPost(data);
     const editedPost = await this.baseApiService.posts.editPost(postId, payload);
     return new Post(editedPost);
