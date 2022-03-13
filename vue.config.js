@@ -19,7 +19,7 @@ module.exports = {
     progress: false,
     proxy: {
       '/api': {
-        target: 'http://localhost',
+        target: 'http://api.example-blog.local:81',
       },
     },
   },
@@ -33,9 +33,5 @@ module.exports = {
         args[0].appConfig = JSON.stringify(appConfig);
         return args;
       });
-  },
-
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/' + process.env.CI_PROJECT_NAME + '/'
-    : '/'
+  }
 };
